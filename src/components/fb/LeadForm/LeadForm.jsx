@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Ad from './Ad/ad';
 import Question from './Question/Question';
-import PrivacyPolicy from './PrivacyPolicy/PrivacyPolicy';
+import PrivacyPolicy from './Privacy/Privacy';
 import Thankyou from './Thank you/Thankyou';
 
 function LeadForm() {
