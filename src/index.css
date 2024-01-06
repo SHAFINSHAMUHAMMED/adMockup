@@ -11,7 +11,7 @@
   
   .input-hover:hover {
     border-style: dotted;
-    border-color: #817d7d; /* or any other color you prefer */
+    border-color: #817d7d;
   }
 .profile-label {
     position: relative;
@@ -26,7 +26,7 @@
     display: inline-block;
     border-radius: 50%;
     padding: 5px;
-    background-color: rgba(255, 255, 255, 0.3); /* White background with 50% transparency */
+    background-color: rgba(255, 255, 255, 0.3); 
 }
 .svg-container svg {
   fill: white;
