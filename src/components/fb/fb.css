@@ -1,0 +1,29 @@
+.fb-main {
+    max-width: 600px;
+    margin: auto;
+}
+.nav-item {
+    /* Style your nav item */
+    position: relative;
+  }
+  
+  .icon-button {
+    /* Style your icon button */
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 10px;
+    font-size: 20px;
+  }
+  .nav-icon{
+    position: relative;
+  }
+  .dropdown {
+    position: absolute; /* Absolute position the dropdown */
+    top: 100%; /* Position it right below the nav-icon */
+    left: 0; /* Align it to the left edge of the nav-icon */
+    width: 200px; /* Set a width for the dropdown */
+    background: white; /* Set a background so it stands out over the content */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional: add a shadow for better visibility */
+    z-index: 100; /* Make sure it's on top of other content */
+  }
