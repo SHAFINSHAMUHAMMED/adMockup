@@ -1,51 +1,88 @@
-import React,{useState,useEffect,useRef} from 'react'
+import React, { useState,useEffect,useRef } from "react";
 import image from "../../../assets/img.jpg";
 import fb from "../../../assets/fblogo.webp"
-
-function message() {
-    const [profileImg, setProfileImg] = useState("");
-  const [uploadedImage, setUploadedImage] = useState(image);
+import ColorThief from 'colorthief';
+function story() {
+  const [profileImgs, setProfileImgs] = useState("");
+  const [uploadedImages, setUploadedImages] = useState(image);
+  const [bgGradient, setBgGradient] = useState('linear-gradient(to right, #ffffff, #ffffff)');
+  const imgRef = useRef(null);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file && file.type.substr(0, 5) === "image") {
-      setProfileImg(URL.createObjectURL(file));
+      setProfileImgs(URL.createObjectURL(file));
     } else {
-      setProfileImg("");
+      setProfileImgs("");
     }
   };
   const handleImageChange2 = (e) => {
     const file = e.target.files[0];
     if (file && file.type.substr(0, 5) === "image") {
-      setUploadedImage(URL.createObjectURL(file));
+      setUploadedImages(URL.createObjectURL(file));
     } else {
-      setUploadedImage("");
+      setUploadedImages("");
     }
   };
+
+  useEffect(() => {
+    const imageElement = imgRef.current;
+  
+    const onLoad = () => {
+      extractColors();
+    };
+  
+    if (imageElement && imageElement.complete) {
+      extractColors();
+    } else if(imageElement) {
+      imageElement.addEventListener('load', onLoad);
+    }
+  
+    // Cleanup function
+    return () => {
+      if (imageElement) {
+        imageElement.removeEventListener('load', onLoad);
+      }
+    };
+  }, [uploadedImages]);
+  
+
+const extractColors = () => {
+    const colorThief = new ColorThief();
+    const palette = colorThief.getPalette(imgRef.current, 3); // Extracts 4 dominant colors
+    const gradientColors = palette.map(color => `rgb(${color.join(',')})`);
+    const gradient = `linear-gradient(to bottom, ${gradientColors.join(', ')})`;
+    setBgGradient(gradient);
+  };
+
   return (
-    <div className='flex align-top justify-evenly items-center w-[380px] m-auto pt-3 pb-3 rounded-md bg-white'>
-      <div>
-      <label
+    <div className='w-[350px] pt-3 m-auto' style={{background: bgGradient,borderRadius:'10px'}}>
+        <div className='w-[95%] h-[2px] bg-gray-300 m-auto rounded-md '></div>
+        <div className="flex justify-between ps-3 pe-3 pt-3 ">
+        <div className='flex gap-2 items-center'>
+        <label
             htmlFor="profile-upload"
             className="profile-label cursor-pointer"
           >
-            {profileImg ? (
+            {profileImgs ? (
               <img
-                src={profileImg}
+                src={profileImgs}
                 alt="User avatar"
                 className="rounded-full object-cover"
                 style={{
-                  width: "60px",
-                  height: "60px",
+                  width: "30px",
+                  height: "30px",
+                  border:'1px solid white',
+                  borderRadius:'50%'
                 }}
               />
             ) : (
-                <img src={fb} alt=""  style={{ width: "60px", height: "60px" }} />
+                <img src={fb} alt=""  style={{ width: "30px", height: "30px", border:'1px solid white', borderRadius:'50%'}} />
               
             )}
             <svg
-              className="pen-icon"
-              width={15}
+            className="pen-icon"
+              width={10}
               fill="#ffffff"
               viewBox="0 0 1920 1920"
               xmlns="http://www.w3.org/2000/svg"
@@ -81,20 +118,16 @@ function message() {
             onChange={handleImageChange}
             style={{ display: "none" }}
           />
-      </div>
-      <div className='flex flex-col gap-1' style={{lineHeight:'15px'}}>
-      <div className='flex gap-2 items-center '>
-      <h4 className='text-lg font-semibold input-hover' contentEditable={true}>Company Name</h4>
-      <span className='bg-gray-400 text-xs rounded-sm p-[1px]'>Ad</span>
-      </div>
-      <p className='text-gray-400 input-hover' contentEditable={true}>Try Ad Mocup Now!</p>
-      <span className='text-blue-600 text-sm cursor-pointer' style={{lineHeight:'-10px'}}>View More</span>
-</div>
-      <svg
+          <div>
+          <h5 className="text-white font-semibold input-hover " contentEditable={true} >Company Name</h5>
+                <p className="text-[12px]  text-white font-normal ">Sponsored</p>
+          </div>
+        </div>
+             <div className="flex gap-2">
+             <svg
           width={20}
-          height={20}
           data-v-46e5644d=""
-          fill="currentColor"
+          fill="white "
           viewBox="0 0 20 20"
         >
           <g
@@ -109,12 +142,17 @@ function message() {
           </g>
         </svg>
 
-        <div>
-        <label htmlFor="upload-ad-icon" className="cursor-pointer banner-img">
+        <svg width={25} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Menu / Close_SM"> <path id="Vector" d="M16 16L12 12M12 12L8 8M12 12L16 8M12 12L8 16" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g> </g></svg>
+                </div>       
+        </div>
+
+        <label htmlFor="upload-ad-image" className="cursor-pointer banner-img  ">
         <img
-          src={uploadedImage}
+        ref={imgRef}
+          src={uploadedImages}
           alt="Ad"
-          className=" h-[60px] w-[60px] rounded-lg object-cover"
+          crossOrigin="anonymous"
+          className="w-full h-[200px] mt-28 mb-28 "
         />
         <svg
           className="pen-icon2"
@@ -141,15 +179,24 @@ function message() {
         </svg>
       </label>
       <input
-        id="upload-ad-icon"
+        id="upload-ad-image"
         type="file"
         accept="image/*"
         onChange={handleImageChange2}
         style={{ display: "none" }}
       />
-        </div>
+      
+      <h3 className="text-white text-lg font-semibold ps-5 " contentEditable={true}><span className="input-hover">Try Ad MockUp free Now</span></h3>
+
+
+      <div className="icons flex justify-evenly pt-16 pb-3">
+        <button className=" button-nxt  text-black font-bold m-auto p-2 ps-8 pe-8 rounded-lg bg-white " contentEditable={true}>
+       <svg width={15} data-v-46e5644d="" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 256 256" xml:space="preserve"><g data-v-46e5644d=""><g data-v-46e5644d=""><polygon data-v-46e5644d="" points="79.093,0 48.907,30.187 146.72,128 48.907,225.813 79.093,256 207.093,128 "></polygon></g></g><g data-v-46e5644d=""></g><g data-v-46e5644d=""></g><g data-v-46e5644d=""></g><g data-v-46e5644d=""></g><g data-v-46e5644d=""></g><g data-v-46e5644d=""></g><g data-v-46e5644d=""></g><g data-v-46e5644d=""></g><g data-v-46e5644d=""></g><g data-v-46e5644d=""></g><g data-v-46e5644d=""></g><g data-v-46e5644d=""></g><g data-v-46e5644d=""></g><g data-v-46e5644d=""></g><g data-v-46e5644d=""></g></svg>
+          <span className="input-hover">Download</span>
+        </button>
+      </div>
     </div>
   )
 }
 
-export default message
+export default story

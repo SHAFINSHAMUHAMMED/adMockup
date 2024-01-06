@@ -26,32 +26,8 @@ function ad() {
       }
     };
   
-  
-  
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState('Select an option');
-    const dropdownRef = useRef();
-  
-    useEffect(() => {
-      function handleWindowClick(event) {
-        if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-          setIsDropdownOpen(false);
-        }
-      }
-  
-      window.addEventListener('click', handleWindowClick);
-  
-      return () => window.removeEventListener('click', handleWindowClick);
-    }, []);
-  
-    // Function to handle option selection
-    const handleOptionClick = (option) => {
-      setSelectedOption(option); // Update the selected option
-      setIsDropdownOpen(false); // Close the dropdown
-    };
-  
     return (
-      <div className="border border-gray-300 rounded bottom-0">
+      <div className="border border-gray-300 rounded bottom-0 bg-white">
         <div className="flex justify-between items-start p-4 pb-0">
           <div className="flex">
             <label
@@ -218,38 +194,16 @@ function ad() {
               />   
           </div>
           
-           <div className="relative" ref={dropdownRef}>
-        <button
-          id="dropdownDefaultButton"
-          data-dropdown-toggle="dropdown"
-          className="text-white bg-gray-400 hover:bg-gray-600 h-[30px] font-medium text-sm px-2 py-1 text-center inline-flex items-center"
-          type="button"
-          onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-        >
-          {selectedOption} {/* Show selected option */}
-          <svg className="w-2.5 h-5 ms-1 mt-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4"/>
-          </svg>
-        </button>
-  
-        {isDropdownOpen && (
-          <div id="dropdown" className="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 absolute">
-            <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
-              <li>
-                <a  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" onClick={() => handleOptionClick('Dashboard')}>Dashboard</a>
-              </li>
-              <li>
-                <a  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" onClick={() => handleOptionClick('Settings')}>Settings</a>
-              </li>
-              <li>
-                <a  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" onClick={() => handleOptionClick('Earnings')}>Earnings</a>
-              </li>
-              <li>
-                <a  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" onClick={() => handleOptionClick('Sign out')}>Sign out</a>
-              </li>
-            </ul>
-          </div>
-        )}
+           <div className="relative">
+           <button
+        id="dropdownDefaultButton"
+        data-dropdown-toggle="dropdown"
+        className=" input-hover text-gray-600 bg-gray-300 hover:bg-gray-400 h-[30px] font-medium text-sm px-3 py-1 text-center inline-flex items-center rounded-md"
+        type="button"
+        contentEditable={true}
+      >
+        Download
+      </button>
       </div>
   
         </div>

@@ -24,7 +24,7 @@ function Thankyou() {
   };
 
   return (
-    <div className="border border-gray-300 bg-gray-200 rounded bottom-0">
+    <div className="border border-gray-300 bg-gray-200 rounded-md bottom-0">
 
       <label htmlFor="upload-ad-image" className="cursor-pointer banner-img">
         <img
@@ -131,8 +131,8 @@ function Thankyou() {
        <h6 className="text-center mt-3 text-xs input-hover" contentEditable={true}>You successfully subimtted your responses.</h6>
         </div>
       <div className="icons flex justify-evenly pt-3 pb-3 bg-white">
-        <button className="bg-blue-500 w-[95%] text-white font-bold m-auto p-2 ps-8 pe-8 rounded-md">
-          Download Form
+        <button className=" bg-blue-500 w-[95%] text-white font-bold m-auto p-2 ps-8 pe-8 rounded-md" contentEditable={true}>
+         <span className="input-hover">Download Form</span> 
         </button>
       </div>
     </div>

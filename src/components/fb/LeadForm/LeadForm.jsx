@@ -5,10 +5,8 @@ import Privacy from './PrivacyPolicy/PrivacyPolicy';
 import Thankyou from './Thank you/Thankyou';
 
 function LeadForm() {
-  // State to track the active component
   const [activeComponent, setActiveComponent] = useState('Ad');
 
-  // Function to render the active component
   const renderActiveComponent = () => {
     switch (activeComponent) {
       case 'Ad':
@@ -24,7 +22,6 @@ function LeadForm() {
     }
   };
 
-  // Function to handle footer h5 click
   const handleFooterClick = (componentName) => {
     setActiveComponent(componentName);
   };
@@ -32,7 +29,7 @@ function LeadForm() {
   return (
     <>
       {renderActiveComponent()}
-      <footer className='mb-5 mt-4'>
+      <footer className='mb-5 mt-8'>
         <h5 className='text-center text-sm font-semibold mb-4'>LEAD FORM STATE</h5>
         <div className='flex justify-evenly'>
           <h5 className={`h5-hover ${activeComponent === 'Ad' ? 'active' : 'text-gray-400'}`} onClick={() => handleFooterClick('Ad')}>AD</h5>

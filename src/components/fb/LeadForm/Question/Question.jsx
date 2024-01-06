@@ -57,7 +57,7 @@ function question() {
 
 
   return (
-    <div className="border border-gray-300 bg-gray-200 rounded bottom-0">
+    <div className="border border-gray-300 bg-gray-200 rounded-md">
 
       <label htmlFor="upload-ad-image" className="cursor-pointer banner-img">
         <img
@@ -99,7 +99,7 @@ function question() {
 
       <div className="question-main bg-white w-[95%] p-5 rounded-xl m-auto">
         <h3 className="text-2xl">Contact Information</h3>
-        <p className="text-lg mt-2 mb-3">Question Headline</p>
+        <p className="text-lg mt-2 mb-3 input-hover" contentEditable={true}>Question Headline</p>
         {questions.map((question) => (
           <div key={question.id} className="question-container flex flex-col mb-3">
             <label className="font-medium" htmlFor="">{question.label}</label>
