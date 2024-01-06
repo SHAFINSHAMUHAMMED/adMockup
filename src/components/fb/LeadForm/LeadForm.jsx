@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Ad from './Ad/ad';
 import Question from './Question/Question';
-import Privacy from './PrivacyPolicy/PrivacyPolicy';
+import PrivacyPolicy from './PrivacyPolicy/PrivacyPolicy';
 import Thankyou from './Thank you/Thankyou';
 
 function LeadForm() {
@@ -14,7 +14,7 @@ function LeadForm() {
       case 'Question':
         return <Question />;
       case 'Privacy':
-        return <Privacy />;
+        return <PrivacyPolicy />;
       case 'Thankyou':
         return <Thankyou />;
       default:
