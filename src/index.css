@@ -213,3 +213,43 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 
   }
+  .navigation-icons {
+    position: relative;
+  }
+  .setting-card {
+    z-index: 100;
+    position: absolute;
+    top: 40px;
+    right: 0;
+  }
+  .opton-card {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+  }
+
+  .container-div {
+    width: 95%;
+    height: 2px;
+    background-color: gray;
+    margin: auto;
+    border-radius: 1px;
+    position: relative; /* Important for absolute positioning of the inner div */
+    overflow: hidden; /* Ensures the inner div doesn't overflow */
+}
+
+.loading-div {
+    position: absolute;
+    height: 100%;
+    width: 0;
+    background-color: white; /* Color of the loading bar */
+    animation: loadingAnimation 6s ease-in-out infinite;
+}
+
+@keyframes loadingAnimation {
+    0% { width: 1%; }
+    100% { width: 100%; }
+}

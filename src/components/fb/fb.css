@@ -1,5 +1,6 @@
 .fb-main {
-    width: 524px;
+    max-width: 524px;
+    width: auto;
     margin: auto;
 }
 .nav-item {

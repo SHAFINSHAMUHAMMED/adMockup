@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import logo from '../../assets/WebQmedia-Official-Logo.svg'
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import logo from "../../assets/WebQmedia-Official-Logo.svg";
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -12,7 +13,9 @@ function Navbar() {
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
           <img src={logo} className="h-10" alt="Webq Logo" />
-          <span className="self-center text-base font-medium whitespace-nowrap dark:text-white mt-3">Ads Mockup</span>
+          <span className="self-center text-base font-medium whitespace-nowrap dark:text-white mt-3">
+            Ads Mockup
+          </span>
         </a>
         <button
           onClick={toggleMenu}
@@ -21,7 +24,7 @@ function Navbar() {
         >
           <span className="sr-only">Toggle menu</span>
           <svg
-            className={`w-5 h-5 ${isMenuOpen ? 'hidden' : 'block'}`}
+            className={`w-5 h-5 ${isMenuOpen ? "hidden" : "block"}`}
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -36,7 +39,7 @@ function Navbar() {
             />
           </svg>
           <svg
-            className={`w-5 h-5 ${isMenuOpen ? 'block' : 'hidden'}`}
+            className={`w-5 h-5 ${isMenuOpen ? "block" : "hidden"}`}
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -51,25 +54,29 @@ function Navbar() {
             />
           </svg>
         </button>
-        <div className={`w-full md:block md:w-auto ${isMenuOpen ? 'block' : 'hidden'}`} id="navbar-default">
+        <div
+          className={`w-full md:block md:w-auto ${
+            isMenuOpen ? "block" : "hidden"
+          }`}
+          id="navbar-default"
+        >
           <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             <li>
-              <a
-                href="#"
+              <Link
+                to='/facebook'
                 className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-
                 aria-current="page"
               >
                 Facebook
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
+              <Link
+                to='/instagram'
                 className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
               >
                 Instagram
-              </a>
+              </Link>
             </li>
             <li>
               <a
