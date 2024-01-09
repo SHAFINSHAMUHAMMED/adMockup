@@ -14,6 +14,7 @@ function Fb() {
   const [setting, setSetting] = useState(false);
   const [options, setOptions] = useState(false);
   const [activeComponent, setActiveComponent] = useState("feeds");
+  const [headerSize, setHeaderSize] = useState("490px");
   const ref = useRef(null);
   const reff = useRef(null);
 
@@ -25,17 +26,17 @@ function Fb() {
   const renderComponent = () => {
     switch (activeComponent) {
       case "feeds":
-        return <Feeds />;
+        return <Feeds setHeaderSize={setHeaderSize} />;
       case "leadForm":
-        return <LeadForm />;
+        return <LeadForm setHeaderSize={setHeaderSize}/>;
       case "message":
-        return <Message />;
+        return <Message setHeaderSize={setHeaderSize} />;
       case "story":
-        return <Story />;
+        return <Story setHeaderSize={setHeaderSize} />;
       case "reels":
-        return <Reels />;
+        return <Reels setHeaderSize={setHeaderSize}/>;
       default:
-        return <Feeds />;
+        return <Feeds setHeaderSize={setHeaderSize} />;
     }
   };
   const isCardActive = (componentName) => {
@@ -71,10 +72,10 @@ function Fb() {
   }, []);
   
   return (
-    <div ref={reff} className="navbar fb-main" onClick={(e) => e.stopPropagation()}>
+    <div style={{maxWidth:headerSize}} ref={reff} className="navbar fb-main" onClick={(e) => e.stopPropagation()}>
       <div className="nav-icons flex justify-end pt-20 pb-2 gap-5">
         {/* Icon 1 */}
-        <div className="nav-icon" onClick={() => setSetting(true)}>
+        <div className="nav-icon" onClick={() => setSetting(!setting)}>
           <svg
             width={25}
             viewBox="0 0 24 24"
@@ -104,7 +105,7 @@ function Fb() {
         </div>
 
         {/* Icon 2 */}
-        <div className="nav-icon" onClick={() => setOptions(true)}>
+        <div className="nav-icon" onClick={() => setOptions(!options)}>
           <svg
             width={25}
             viewBox="0 0 24 24"
@@ -129,7 +130,7 @@ function Fb() {
         {setting ? (
           <div className="settings-card drop-shadow-md  bg-white rounded-md p-5">
             <h4 className="text-lg font-semibold ps-5">Ad Type</h4>
-            <div className="flex items-center justify-center p-5 z-10">
+            <div className="flex items-center justify-center p-5 z-10 max-h-[80px]">
               <div
                 className={`option-card ${isCardActive("feeds")}`}
                 onClick={() => handleIconClick("feeds")}
@@ -267,7 +268,7 @@ function Fb() {
                     </g>{" "}
                   </g>
                 </svg>
-                <h5 className="text-sm">News Feed</h5>
+                <h5 className="text-sm">Feeds</h5>
               </div>
               <div
                 className={`option-card ${isCardActive("leadForm")}`}
@@ -295,7 +296,7 @@ function Fb() {
                     ></polygon>{" "}
                   </g>
                 </svg>
-                <h5 className="text-sm">Lead Form</h5>
+                <h5 className="text-sm">Lead</h5>
               </div>
               <div
                 className={`option-card ${isCardActive("message")}`}
@@ -316,9 +317,6 @@ function Fb() {
                     stroke-linejoin="round"
                   ></g>
                   <g id="SVGRepo_iconCarrier">
-                    {" "}
-                    <title>Messenger-color</title>{" "}
-                    <desc>Created with Sketch.</desc> <defs> </defs>{" "}
                     <g
                       id="Icons"
                       stroke="none"

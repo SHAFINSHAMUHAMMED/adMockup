@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import image from "../../../assets/img.jpg";
 import fb from "../../../assets/fblogo.webp"
-function Feeds() {
+function Feeds({setHeaderSize}) {
   const [profileImg, setProfileImg] = useState("");
   const [companyName, setCompanyName] = useState("Default Company Name");
   const [adText, setAdText] = useState("Try Ad Mocup Now! its free");
   const [adText2, setAdText2] = useState("Try Ad Mocup Now! its free");
   const [adP, setAdP] = useState("Ad Mockups lets you create fast and easy mockups all in one place. Test it out!");
+
+  useEffect(() => {
+    setHeaderSize('500px');
+  }, [setHeaderSize]);
 
   const [uploadedImage, setUploadedImage] = useState(image);
   const handleImageChange = (e) => {

@@ -1,16 +1,16 @@
 import React, { useState,useRef,useEffect } from 'react';
-import Feed from './InstaFeed/InstaFeeds';
-import Story from './InstaStory/InstaStory';
-import Reel from './InstaReel/InstaReel';
+import Text from './Text/GoogleText';
+import GoogleLeadForm from './GoogleLeadForm/GoogleLeadForm';
 import domtoimage from 'dom-to-image';
 
 
-function Instagram() {
+function Google() {
   const [activeComponent, setActiveComponent] = useState("feeds");
-  const [headerSize, setHeaderSize] = useState("490px");
+  const [headerSize, setHeaderSize] = useState("632px");
   const componentRef = useRef(null);
   const [setting, setSetting] = useState(false);
   const [options, setOptions] = useState(false);
+  const [mobile, setMobile] = useState (false)
   const ref = useRef(null);
   const reff = useRef(null);
 
@@ -53,14 +53,12 @@ const isCardActive = (componentName) => {
 
   const renderComponent = () => {
     switch (activeComponent) {
-      case "feeds":
-        return <Feed setHeaderSize={setHeaderSize} />;
-      case "story":
-        return <Story setHeaderSize={setHeaderSize} />;
-      case "reels":
-        return <Reel   setHeaderSize={setHeaderSize} />;
+      case "text":
+        return <Text setHeaderSize={setHeaderSize} mobile={mobile} />;
+      case "leadForm":
+        return <GoogleLeadForm setHeaderSize={setHeaderSize} mobile={mobile} />;
       default:
-        return <Feed  setHeaderSize={setHeaderSize} />;
+        return <Text  setHeaderSize={setHeaderSize} mobile={mobile} />;
     }
   };
 
@@ -68,6 +66,9 @@ const isCardActive = (componentName) => {
     <div style={{maxWidth:headerSize}} ref={reff}   className="navbar nav-header-main bg-white m-auto mt-16" onClick={(e) => e.stopPropagation()}>
       <div className="navigation-icons flex justify-end pt-2 pb-2 gap-5">
         {/* Icon 1 */}
+        <div className="nav-icon" onClick={() => setMobile(!mobile)}>
+        <svg className='mobile-icon' fill="#403f3f" width={25} viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" stroke="#403f3f"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>mobile</title> <path d="M22 0.75h-12c-1.794 0.002-3.248 1.456-3.25 3.25v24c0.002 1.794 1.456 3.248 3.25 3.25h12c1.794-0.001 3.249-1.456 3.25-3.25v-24c-0.002-1.794-1.456-3.248-3.25-3.25h-0zM22.75 28c-0 0.414-0.336 0.75-0.75 0.75h-12c-0.414-0-0.75-0.336-0.75-0.75v-24c0.001-0.414 0.336-0.749 0.75-0.75h12c0.414 0 0.75 0.336 0.75 0.75v0zM18 25.25h-4c-0.69 0-1.25 0.56-1.25 1.25s0.56 1.25 1.25 1.25v0h4c0.69 0 1.25-0.56 1.25-1.25s-0.56-1.25-1.25-1.25v0z"></path> </g></svg>
+        </div>
         <div className="nav-icon" onClick={() => setSetting(!setting)}>
           <svg
             width={25}
@@ -121,12 +122,12 @@ const isCardActive = (componentName) => {
           </svg>
         </div>
         {setting ? (
-          <div className="setting-card   bg-white rounded-md p-1">
+          <div className="settings-card drop-shadow-md  bg-white rounded-md p-5">
             <h4 className="text-lg font-semibold ps-5">Ad Type</h4>
-            <div className="flex items-center justify-center p-5 z-10">
+            <div className="flex items-center justify-center p-5 z-10 max-h-[80px]">
               <div
-                className={`option-card ${isCardActive("feeds")}`}
-                onClick={() => handleIconClick("feeds")}
+                className={`option-card ${isCardActive("text")}`}
+                onClick={() => handleIconClick("text")}
               >
                 <svg
                   width={35}
@@ -261,42 +262,17 @@ const isCardActive = (componentName) => {
                     </g>{" "}
                   </g>
                 </svg>
-                <h5 className="text-sm">News Feed</h5>
+                <h5 className="text-sm">Text</h5>
               </div>
               <div
-                className={`option-card ${isCardActive("story")}`}
-                onClick={() => handleIconClick("story")}
-              >
-                <svg
-                  width={35}
-                  fill="#007FFF"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                  <g
-                    id="SVGRepo_tracerCarrier"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  ></g>
-                  <g id="SVGRepo_iconCarrier">
-                    <path
-                      fill-rule="evenodd"
-                      d="M0 3.75A.75.75 0 01.75 3h7.497c1.566 0 2.945.8 3.751 2.014A4.496 4.496 0 0115.75 3h7.5a.75.75 0 01.75.75v15.063a.75.75 0 01-.755.75l-7.682-.052a3 3 0 00-2.142.878l-.89.891a.75.75 0 01-1.061 0l-.902-.901a3 3 0 00-2.121-.879H.75a.75.75 0 01-.75-.75v-15zm11.247 3.747a3 3 0 00-3-2.997H1.5V18h6.947a4.5 4.5 0 012.803.98l-.003-11.483zm1.503 11.485V7.5a3 3 0 013-3h6.75v13.558l-6.927-.047a4.5 4.5 0 00-2.823.971z"
-                    ></path>
-                  </g>
-                </svg>
-                <h5 className="text-sm">Story</h5>
-              </div>
-              <div
-                className={`option-card ${isCardActive("reels")}`}
-                onClick={() => handleIconClick("reels")}
+                className={`option-card ${isCardActive("leadForm")}`}
+                onClick={() => handleIconClick("leadForm")}
               >
                 <svg
                   width={35}
                   viewBox="0 0 24 24"
-                  fill="none"
                   xmlns="http://www.w3.org/2000/svg"
+                  fill="#000000"
                 >
                   <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                   <g
@@ -306,17 +282,61 @@ const isCardActive = (componentName) => {
                   ></g>
                   <g id="SVGRepo_iconCarrier">
                     {" "}
-                    <path
-                      d="M7 5V19M17 5V19M3 8H7M17 8H21M3 16H7M17 16H21M3 12H21M6.2 20H17.8C18.9201 20 19.4802 20 19.908 19.782C20.2843 19.5903 20.5903 19.2843 20.782 18.908C21 18.4802 21 17.9201 21 16.8V7.2C21 6.0799 21 5.51984 20.782 5.09202C20.5903 4.71569 20.2843 4.40973 19.908 4.21799C19.4802 4 18.9201 4 17.8 4H6.2C5.0799 4 4.51984 4 4.09202 4.21799C3.71569 4.40973 3.40973 4.71569 3.21799 5.09202C3 5.51984 3 6.07989 3 7.2V16.8C3 17.9201 3 18.4802 3.21799 18.908C3.40973 19.2843 3.71569 19.5903 4.09202 19.782C4.51984 20 5.07989 20 6.2 20Z"
+                    <polygon
+                      fill="none"
                       stroke="#007FFF"
                       stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    ></path>{" "}
+                      points="6 8 11.667 12.667 11.667 18 12.333 18 12.333 12.667 18 8 18 6 6 6"
+                    ></polygon>{" "}
                   </g>
                 </svg>
-                <h5 className="text-sm">Reel</h5>
+                <h5 className="text-sm">Lead</h5>
               </div>
+              <div
+                className={`option-card ${isCardActive("call")}`}
+                onClick={() => handleIconClick("call")}
+              >
+                <svg
+                  width={35}
+                  viewBox="0 0 48 48"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  fill="#000000"
+                >
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g
+                    id="SVGRepo_tracerCarrier"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <g
+                      id="Icons"
+                      stroke="none"
+                      stroke-width="1"
+                      fill="none"
+                      fill-rule="evenodd"
+                    >
+                      {" "}
+                      <g
+                        id="Color-"
+                        transform="translate(-301.000000, -860.000000)"
+                        fill="#007FFF"
+                      >
+                        {" "}
+                        <path
+                          d="M325,860 C311.745143,860 301,869.949185 301,882.222222 C301,889.215556 304.489988,895.453481 309.944099,899.526963 L309.944099,908 L318.115876,903.515111 C320.296745,904.118667 322.607155,904.444444 325,904.444444 C338.254857,904.444444 349,894.495259 349,882.222222 C349,869.949185 338.254857,860 325,860 L325,860 Z M327.385093,889.925926 L321.273292,883.407407 L309.347826,889.925926 L322.465839,876 L328.726708,882.518519 L340.503106,876 L327.385093,889.925926 L327.385093,889.925926 Z"
+                          id="Messenger"
+                        >
+                          {" "}
+                        </path>{" "}
+                      </g>{" "}
+                    </g>{" "}
+                  </g>
+                </svg>
+                <h5 className="text-sm">Callll</h5>
+              </div>        
             </div>
           </div>
         ) : (
@@ -397,7 +417,7 @@ const isCardActive = (componentName) => {
           ""
         )}
       </div>
-      <div className="drop-shadow-lg" ref={componentRef} style={{ width: '100%', overflow: 'hidden' }}>
+      <div className="drop-shadow-lg rounded-lg" ref={componentRef} style={{ width: '100%', overflow: 'hidden' }}>
   {renderComponent()}
 </div>
     </div>
@@ -405,4 +425,4 @@ const isCardActive = (componentName) => {
   );
 }
 
-export default Instagram;
+export default Google;

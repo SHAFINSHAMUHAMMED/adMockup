@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import Ad from './Ad/ad';
 import Question from './Question/Question';
 import PrivacyPolicy from './Privacy/Privacy';
 import Thankyou from './Thank you/Thankyou';
 
-function LeadForm() {
+function LeadForm({setHeaderSize}) {
   const [activeComponent, setActiveComponent] = useState('Ad');
 
+  useEffect(() => {
+    setHeaderSize('500px');
+  }, [setHeaderSize]);
+  
   const renderActiveComponent = () => {
     switch (activeComponent) {
       case 'Ad':

@@ -2,11 +2,15 @@ import React, { useState,useEffect,useRef } from "react";
 import image from "../../../assets/img.jpg";
 import fb from "../../../assets/fblogo.webp"
 import ColorThief from 'colorthief';
-function story() {
+function story({setHeaderSize}) {
   const [profileImgs, setProfileImgs] = useState("");
   const [uploadedImages, setUploadedImages] = useState(image);
   const [bgGradient, setBgGradient] = useState('linear-gradient(to right, #ffffff, #ffffff)');
   const imgRef = useRef(null);
+
+  useEffect(() => {
+    setHeaderSize('321px');
+  }, [setHeaderSize]);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];

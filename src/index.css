@@ -200,6 +200,7 @@
     position: relative;
   }
   .settings-card {
+    max-width: 100%;
     z-index: 100;
     position: absolute;
     top: 110px;
@@ -217,10 +218,13 @@
     position: relative;
   }
   .setting-card {
+    max-width: 100%;
+    margin: auto;
     z-index: 100;
     position: absolute;
     top: 40px;
     right: 0;
+    border: 1px solid rgba(128, 128, 128, 0.385);
   }
   .opton-card {
     position: absolute;
@@ -252,4 +256,21 @@
 @keyframes loadingAnimation {
     0% { width: 1%; }
     100% { width: 100%; }
+}
+
+.google-text {
+  box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%);
+  /* border-radius: 8px; */
+}
+.google-input {
+  position: relative;
+  border: 1px solid rgba(120, 120, 120, 0.41);
+  border-radius: 5px;
+}
+.google-icon-close{
+  position: absolute;
+  color: rgba(128, 128, 128, 0.697);
+  font-size: 13px;
+  right: 10px;
+  top:30%;
 }

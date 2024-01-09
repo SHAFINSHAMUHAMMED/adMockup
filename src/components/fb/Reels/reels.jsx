@@ -1,9 +1,13 @@
 import React, {useState,useEffect} from 'react'
 import image from "../../../assets/img.jpg";
 import fb from "../../../assets/fblogo.webp"
-function reels() {
+function reels({setHeaderSize}) {
     const [profileImg, setProfileImg] = useState("");
   const [uploadedImage, setUploadedImage] = useState(image);
+
+  useEffect(() => {
+    setHeaderSize('321px');
+  }, [setHeaderSize]);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];

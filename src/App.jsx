@@ -4,6 +4,7 @@ import './App.css'
 import Navbar from './components/navbar/navbar'
 import Fb from './components/fb/Fb'
 import Instagram from './components/Instagram/instagram';
+import Google from './components/Google/Google';
 function App() {
 
   return (
@@ -12,7 +13,7 @@ function App() {
       <Routes>
         <Route path="/facebook" element={<Fb />} />
         <Route path="/instagram" element={<Instagram />} />
-        {/* <Route path="/google" element={<Google />} /> */}
+        <Route path="/google" element={<Google />} />
       </Routes>
     </Router>
   )
