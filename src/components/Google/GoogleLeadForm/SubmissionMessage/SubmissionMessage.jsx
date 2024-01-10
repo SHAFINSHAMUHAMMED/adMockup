@@ -1,52 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 
-function GoogleForm({setHeaderSize}) {
+function SubmissionMessage({setHeaderSize}) {
   const [selectedImage, setSelectedImage] = useState(null);
   const [isHovered, setIsHovered] = useState(false);
-  const [questions, setQuestions] = useState([
-    { id: 1, label: "Name", placeholder: "Enter Your Answer." },
-    { id: 2, label: "Place", placeholder: "Enter Your Answer." },
-  ]);
-
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const imageInputRef = useRef(null);
 
   useEffect(() => {
     setHeaderSize('390px');
   }, [setHeaderSize]);
-
-  // Function to remove a questionss
-  const removeQuestion = (id) => {
-    setQuestions(questions.filter((question) => question.id !== id));
-  };
-
-  const handleSelectQuestion = (label, e) => {
-    e.preventDefault();
-    const newId =
-      questions.length > 0 ? Math.max(...questions.map((q) => q.id)) + 1 : 1;
-    setQuestions([
-      ...questions,
-      { id: newId, label: label, placeholder: "Enter Your Answer." },
-    ]);
-    setIsDropdownOpen(false);
-  };
-
-  const dropdownOptions = [
-    "Name",
-    "Place",
-    "Email",
-    "Phone",
-    "First name",
-    "Last name",
-    "Full name",
-    "Country",
-    "State",
-    "City",
-    "Pincode", // Add more optionsss
-  ];
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
 
   useEffect(() => {
     function handleWindowClick(event) {
@@ -88,7 +50,7 @@ function GoogleForm({setHeaderSize}) {
   return (
     <>
       <div
-        className="max-w-[390px] p-6 m-auto relative border border-gray-300 border-b-0  rounded-md rounded-b-none"
+        className="max-w-[390px] p-6 m-auto relative border border-gray-300   rounded-md rounded-b-none"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
@@ -213,8 +175,6 @@ function GoogleForm({setHeaderSize}) {
                   ></g>
                   <g id="SVGRepo_iconCarrier">
                     {" "}
-                    <title>image_picture [#696969]</title>{" "}
-                    <desc>Created with Sketch.</desc> <defs> </defs>{" "}
                     <g
                       id="Page-1"
                       stroke="none"
@@ -273,68 +233,20 @@ function GoogleForm({setHeaderSize}) {
           Business name
         </span>
         <br />
-        <p className=" text-[14px] text-gray-600 mt-2 mb-2 ">
-          {" "}
-          <span className="input-hover" contentEditable={true}>
-            {" "}
-            Description{" "}
-          </span>
-        </p>
-        {questions.map((question) => (
-          <div
-            key={question.id}
-            className="question-container flex flex-col mb-3"
-          >
-            <input
-              className="border p-2 ps-5 google-input"
-              type="text"
-              placeholder={question.label}
-            />
-            <button
-              onClick={() => removeQuestion(question.id)}
-              className="close google-icon-close"
-            >
-              × Remove Field
-            </button>
-          </div>
-        ))}
-        {isHovered && (
-          <div className="questions-input-container mb-3">
-            <button onClick={toggleDropdown} className="btn-add-question">
-              + Add Question
-            </button>
-            {isDropdownOpen && (
-              <ul className="inline-dropdown">
-                {dropdownOptions.map((option) => (
-                  <li key={option}>
-                    <a
-                      href="#"
-                      onClick={(e) => handleSelectQuestion(option, e)}
-                      className="inline-dropdown-item"
-                    >
-                      {option}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-        )}
-        <p className="text-[12px] leading-4 p-1 ">
-          By submitting, you agree to send your info to Business name so that
-          they can contact you about the above request. Business name agrees to
-          use your info in accordance with their privacy policy. Google will
-          also use your info in accordance with our privacy policy.
-        </p>
-      </div>
-      <div className="max-w-[390px] m-auto relative border border-gray-300 border-t-0 rounded-md rounded-t-none text-right ">
-        <hr />
-        <button className="bg-blue-600 text-white font-medium p-1 ps-4 pe-4 rounded-md me-3 mt-3 mb-3">
-          Submit
-        </button>
+        <div className="flex flex-col items-center border mt-10">
+        <svg style={{marginTop:'-20px'}} xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 35 35" fill="none">
+  <rect x="0.5" y="0.5" width="34" height="34" rx="17" fill="white"/>
+  <rect x="0.5" y="0.5" width="34" height="34" rx="17" stroke="#353333"/>
+  <path d="M18 27C22.95 27 27 22.95 27 18C27 13.05 22.95 9 18 9C13.05 9 9 13.05 9 18C9 22.95 13.05 27 18 27Z" stroke="#0073FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path opacity="0.34" d="M13 18.5L15.9965 21L22.5 15" stroke="#0073FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+        <h4 className="text-[22px] font-semibold text-center mt-4 mb-4 input-hover" contentEditable={true}>Sent!</h4>
+        <p className="text-[14px] text-gray-500 text-center mb-3 input-hover" contentEditable={true}>Description</p>
+        <span className=" text-[16px] text-center font-medium border p-1 ps-4 pe-4 mb-4 text-blue-700 " contentEditable={true}> <span className="input-hover">Visit site</span></span>
+        </div>
       </div>
     </>
   );
 }
 
-export default GoogleForm;
+export default SubmissionMessage;

@@ -1,21 +1,24 @@
 import React, { useState,useEffect } from 'react';
 import Ad from './GoogleAd/GoogleAd';
 import GoogleForm from './GoogleForm/GoogleForm';
+import SubmissionMessage from './SubmissionMessage/SubmissionMessage'
 
 
 function GoogleLeadForm({setHeaderSize,mobile}) {
   const [activeComponent, setActiveComponent] = useState('Ad');
 
-  useEffect(() => {
-    setHeaderSize('532px');
-  }, [setHeaderSize]);
+  // useEffect(() => {
+  //   setHeaderSize('532px');
+  // }, [setHeaderSize]);
   
   const renderActiveComponent = () => {
     switch (activeComponent) {
       case 'Ad':
-        return <Ad mobile={mobile} />;
+        return <Ad mobile={mobile} setHeaderSize={setHeaderSize} />;
         case 'LeadForm':
-            return <GoogleForm mobile={mobile}/>
+            return <GoogleForm mobile={mobile} setHeaderSize={setHeaderSize}/>
+        case 'SubmissionMessage': 
+            return < SubmissionMessage mobile={mobile} setHeaderSize={setHeaderSize}/>
       default:
         return null;
     }

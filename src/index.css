@@ -274,3 +274,16 @@
   right: 10px;
   top:30%;
 }
+.google-sel-img {
+  position: relative;
+}
+.google-img-buttons {
+  display: none;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+.google-sel-img:hover .google-img-buttons{
+  display: flex;
+  gap:10px;
+}

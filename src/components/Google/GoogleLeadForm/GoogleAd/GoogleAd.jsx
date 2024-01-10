@@ -1,6 +1,9 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 
-function GoogleAd({mobile}) {
+function GoogleAd({mobile,setHeaderSize}) {
+  useEffect(() => {
+    setHeaderSize('632px');
+  }, [setHeaderSize]);
   return (
     <div className='bg-white p-5'>
        <div className={`flex items-center ${mobile ? 'text-[12px]' : 'text-[14px]'}`}>
