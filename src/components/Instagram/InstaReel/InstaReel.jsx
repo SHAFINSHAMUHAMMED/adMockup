@@ -2,10 +2,11 @@ import React, {useState,useEffect,useRef} from 'react'
 import NavHeader from '../NavHeader/NavHeader'
 import image from "../../../assets/img.jpg";
 import webq from "../../../assets/WebQmedia-Official-Logo.svg"
-function InstaReel({setHeaderSize}) {
+function InstaReel({setHeaderSize, mobile,format}) {
     const [profileImg, setProfileImg] = useState("");
   const [uploadedImage, setUploadedImage] = useState(image);
   const myRef = useRef(null);
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     setHeaderSize('320px');
@@ -27,10 +28,26 @@ function InstaReel({setHeaderSize}) {
       setUploadedImage("");
     }
   };
+
+  const handleImageClick = () => {
+    if (format === '1:1') {
+      fileInputRef.current.click();
+    }
+  };
+  const placeholderStyle = {
+    width: '100%',
+    height: '344px',
+    marginTop: '28px',
+    marginBottom: '20px'
+  };
+
   return (
     <div  ref={myRef} className='m-auto w-[320px]'>
-    <div className='bg-black  m-auto flex flex-col rounded-lg pb-5'>
-        <div className='flex justify-between ps-5 pe-3 pt-5 '>
+    {format=='1:1' ? (
+<img className="absolute h-full object-cover z-1 rounded-[10px]" onClick={handleImageClick} src={uploadedImage} alt="" />
+):('')}
+    <div className='bg-black  m-auto flex flex-col rounded-lg pb-5 '>
+        <div className='flex justify-between ps-5 pe-3 pt-5 z-10'>
             <h1 className='text-white text-[32px] font-[700]'>Reels</h1>
             
 <svg width="25"  viewBox="0 0 597 587" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -38,6 +55,7 @@ function InstaReel({setHeaderSize}) {
 </svg>
 
         </div>
+        {format=='1:1' ? ( <div style={placeholderStyle}></div>):(
       <label htmlFor="upload-ad-image" className="cursor-pointer banner-img h-[200px] mt-28 mb-20">
         <img
           src={uploadedImage}
@@ -69,14 +87,16 @@ function InstaReel({setHeaderSize}) {
           </g>
         </svg>
       </label>
+        )}
       <input
+      ref={fileInputRef}
         id="upload-ad-image"
         type="file"
         accept="image/*"
         onChange={handleImageChange2}
         style={{ display: "none" }}
       />
-      <div className='flex justify-between items-center ps-3 pe-5'>
+      <div className='flex justify-between items-center ps-3 pe-5 z-10'>
 <div className='w-[80%]'>
 <div className='flex  gap-2 items-center'>
         <label

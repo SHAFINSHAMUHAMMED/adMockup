@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
-function SubmissionMessage({setHeaderSize}) {
+function SubmissionMessage({setHeaderSize,mobile}) {
   const [selectedImage, setSelectedImage] = useState(null);
   const [isHovered, setIsHovered] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -21,6 +21,14 @@ function SubmissionMessage({setHeaderSize}) {
 
     return () => window.removeEventListener("click", handleWindowClick);
   }, []);
+
+  useEffect(() => {
+    // Check for mobile device
+    if (mobile) {
+      setSelectedImage(null);
+    }
+  }, [mobile, setSelectedImage]);
+  
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -46,15 +54,14 @@ function SubmissionMessage({setHeaderSize}) {
     }
   };
   
-
   return (
     <>
       <div
-        className="max-w-[390px] p-6 m-auto relative border border-gray-300   rounded-md rounded-b-none"
+        className={`  m-auto relative border ${mobile ? 'bg-[#f1f3f4] max-w-[320px] p-4' : 'max-w-[390px] p-6'} border-[#dfdfe0] rounded-md rounded-b-none`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        {isHovered || selectedImage ? (
+        { !mobile && isHovered || selectedImage ? (
           <div className=" flex justify-center border border-gray-300  mb-2 ">
             {selectedImage ? (
               <div className="google-sel-img w-full h-[175px]">
@@ -226,13 +233,15 @@ function SubmissionMessage({setHeaderSize}) {
           </div>
         ) : null}
 
-        <span
+       {!mobile ? ( <span
           className="text-[18px] font-semibold input-hover"
           contentEditable={true}
         >
           Business name
         </span>
+        ):null}
         <br />
+        {!mobile ? (
         <div className="flex flex-col items-center border mt-10">
         <svg style={{marginTop:'-20px'}} xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 35 35" fill="none">
   <rect x="0.5" y="0.5" width="34" height="34" rx="17" fill="white"/>
@@ -244,6 +253,23 @@ function SubmissionMessage({setHeaderSize}) {
         <p className="text-[14px] text-gray-500 text-center mb-3 input-hover" contentEditable={true}>Description</p>
         <span className=" text-[16px] text-center font-medium border p-1 ps-4 pe-4 mb-4 text-blue-700 " contentEditable={true}> <span className="input-hover">Visit site</span></span>
         </div>
+        ):(
+            <div>
+            <div className="flex flex-col items-center gap-4 min-h-[296px] p-8">
+            <svg fill="#188038" width="75px" height="75px" viewBox="0 0 200 200" data-name="Layer 1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" stroke="#188038" stroke-width="1.4000000000000001"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><title></title><path d="M100,15a85,85,0,1,0,85,85A84.93,84.93,0,0,0,100,15Zm0,150a65,65,0,1,1,65-65A64.87,64.87,0,0,1,100,165Zm25-91.5-29,35L76,94c-4.5-3.5-10.5-2.5-14,2s-2.5,10.5,2,14c6,4.5,12.5,9,18.5,13.5,4.5,3,8.5,7.5,14,8,1.5,0,3.5,0,5-1l3-3,22.5-27c4-5,8-9.5,12-14.5,3-4,4-9,.5-13L138,71.5c-3.5-2.5-9.5-2-13,2Z"></path></g></svg>
+                <span className="text-[#188038] text-[20px] font-semibold input-hover"
+          contentEditable={true}>Send!</span>
+                <h5 className="text-[15px] text-gray-400 input-hover"
+          contentEditable={true}>Description</h5>
+                <span className="text-[15px] rounded-full p-1 ps-3 pe-3 border-gray-400 border bg-white text-gray-500 font-medium "><span className="input-hover"
+          contentEditable={true}>Visit site</span></span>
+
+            </div>
+            <button className="bg-blue-600 text-white w-full rounded-lg p-2"><span className="input-hover text-sm font-semibold"
+          contentEditable={true}>CONTINUE SEARCHING ON GOOGLE</span></button>
+
+            </div>
+        )}
       </div>
     </>
   );

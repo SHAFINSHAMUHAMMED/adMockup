@@ -11,6 +11,8 @@ function Instagram() {
   const componentRef = useRef(null);
   const [setting, setSetting] = useState(false);
   const [options, setOptions] = useState(false);
+  const [mobile, setMobile] = useState(false);
+const [sizeActive, setsizeActive] = useState('original')
   const ref = useRef(null);
   const reff = useRef(null);
 
@@ -18,13 +20,17 @@ function Instagram() {
     setActiveComponent(componentName);
     setSetting(false);
   };
+
+const setSize = (size) => {
+  setsizeActive(size)
+}
+
 const isCardActive = (componentName) => {
   return activeComponent === componentName ? "option-card option-card-active" : "option-card";
 };
 
 
   const handleDownload = (imageType) => {
-    console.log(componentRef.current);
     domtoimage.toPng(componentRef.current)
       .then((dataUrl) => {
         setOptions(false)
@@ -54,20 +60,47 @@ const isCardActive = (componentName) => {
   const renderComponent = () => {
     switch (activeComponent) {
       case "feeds":
-        return <Feed setHeaderSize={setHeaderSize} />;
+        return <Feed setHeaderSize={setHeaderSize} mobile={mobile}  />;
       case "story":
-        return <Story setHeaderSize={setHeaderSize} />;
+        return <Story setHeaderSize={setHeaderSize} mobile={mobile} format={sizeActive}  />;
       case "reels":
-        return <Reel   setHeaderSize={setHeaderSize} />;
+        return <Reel   setHeaderSize={setHeaderSize} mobile={mobile} format={sizeActive} />;
       default:
-        return <Feed  setHeaderSize={setHeaderSize} />;
+        return <Feed  setHeaderSize={setHeaderSize} mobile={mobile}  />;
     }
   };
 
   return (
-    <div style={{maxWidth:headerSize}} ref={reff}   className="navbar nav-header-main bg-white m-auto mt-16" onClick={(e) => e.stopPropagation()}>
+    <div className='flex'>
+    <div style={{minWidth: headerSize, maxWidth:'900px'}} ref={reff}   className="navbar nav-header-main bg-white m-auto mt-16" onClick={(e) => e.stopPropagation()}>
       <div className="navigation-icons flex justify-end pt-2 pb-2 gap-5">
         {/* Icon 1 */}
+        <div className="nav-icon" onClick={() => setMobile(!mobile)}>
+          <svg
+            className="mobile-icon"
+            fill={mobile ? "#2263db" : "#403f3f"}
+            width={25}
+            viewBox="0 0 32 32"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            stroke={mobile ? "#2263db" : "#403f3f"}
+          >
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g
+              id="SVGRepo_tracerCarrier"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></g>
+            <g id="SVGRepo_iconCarrier">
+              {" "}
+              <title>mobile</title>{" "}
+              <path d="M22 0.75h-12c-1.794 0.002-3.248 1.456-3.25 3.25v24c0.002 1.794 1.456 3.248 3.25 3.25h12c1.794-0.001 3.249-1.456 3.25-3.25v-24c-0.002-1.794-1.456-3.248-3.25-3.25h-0zM22.75 28c-0 0.414-0.336 0.75-0.75 0.75h-12c-0.414-0-0.75-0.336-0.75-0.75v-24c0.001-0.414 0.336-0.749 0.75-0.75h12c0.414 0 0.75 0.336 0.75 0.75v0zM18 25.25h-4c-0.69 0-1.25 0.56-1.25 1.25s0.56 1.25 1.25 1.25v0h4c0.69 0 1.25-0.56 1.25-1.25s-0.56-1.25-1.25-1.25v0z"></path>{" "}
+            </g>
+          </svg>
+        </div>
+
+        {/* Icon 2 */}
+
         <div className="nav-icon" onClick={() => setSetting(!setting)}>
           <svg
             width={25}
@@ -97,7 +130,7 @@ const isCardActive = (componentName) => {
           </svg>
         </div>
 
-        {/* Icon 2 */}
+        {/* Icon 3 */}
         <div className="nav-icon" onClick={() => setOptions(!options)}>
           <svg
             width={25}
@@ -261,7 +294,7 @@ const isCardActive = (componentName) => {
                     </g>{" "}
                   </g>
                 </svg>
-                <h5 className="text-sm">News Feed</h5>
+                <h5 className="text-sm">Feeds</h5>
               </div>
               <div
                 className={`option-card ${isCardActive("story")}`}
@@ -318,6 +351,73 @@ const isCardActive = (componentName) => {
                 <h5 className="text-sm">Reel</h5>
               </div>
             </div>
+            {/* //fit// */}
+            {activeComponent=='reels' || activeComponent=="story" ? (
+<div>
+  <h4>Ad Format</h4>
+  <div className='flex gap-5 text-center items-center'>
+  <div
+                className={``}
+                onClick={() => setSize("original")}
+              >
+                <svg
+                  width={35}
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g
+                    id="SVGRepo_tracerCarrier"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></g>
+                  <g id="SVGRepo_iconCarrier">
+                    {" "}
+                    <path
+                      d="M7 5V19M17 5V19M3 8H7M17 8H21M3 16H7M17 16H21M3 12H21M6.2 20H17.8C18.9201 20 19.4802 20 19.908 19.782C20.2843 19.5903 20.5903 19.2843 20.782 18.908C21 18.4802 21 17.9201 21 16.8V7.2C21 6.0799 21 5.51984 20.782 5.09202C20.5903 4.71569 20.2843 4.40973 19.908 4.21799C19.4802 4 18.9201 4 17.8 4H6.2C5.0799 4 4.51984 4 4.09202 4.21799C3.71569 4.40973 3.40973 4.71569 3.21799 5.09202C3 5.51984 3 6.07989 3 7.2V16.8C3 17.9201 3 18.4802 3.21799 18.908C3.40973 19.2843 3.71569 19.5903 4.09202 19.782C4.51984 20 5.07989 20 6.2 20Z"
+                      stroke="#007FFF"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>{" "}
+                  </g>
+                </svg>
+                <h5 className="text-sm">Original</h5>
+              </div>
+              <div
+                className={``}
+                onClick={() => setSize("1:1")}
+              >
+                <svg
+                  width={35}
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g
+                    id="SVGRepo_tracerCarrier"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></g>
+                  <g id="SVGRepo_iconCarrier">
+                    {" "}
+                    <path
+                      d="M7 5V19M17 5V19M3 8H7M17 8H21M3 16H7M17 16H21M3 12H21M6.2 20H17.8C18.9201 20 19.4802 20 19.908 19.782C20.2843 19.5903 20.5903 19.2843 20.782 18.908C21 18.4802 21 17.9201 21 16.8V7.2C21 6.0799 21 5.51984 20.782 5.09202C20.5903 4.71569 20.2843 4.40973 19.908 4.21799C19.4802 4 18.9201 4 17.8 4H6.2C5.0799 4 4.51984 4 4.09202 4.21799C3.71569 4.40973 3.40973 4.71569 3.21799 5.09202C3 5.51984 3 6.07989 3 7.2V16.8C3 17.9201 3 18.4802 3.21799 18.908C3.40973 19.2843 3.71569 19.5903 4.09202 19.782C4.51984 20 5.07989 20 6.2 20Z"
+                      stroke="#007FFF"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>{" "}
+                  </g>
+                </svg>
+                <h5 className="text-sm">1:1</h5>
+              </div>
+              </div>
+</div>
+):('')}
+
           </div>
         ) : (
           ""
@@ -401,7 +501,7 @@ const isCardActive = (componentName) => {
   {renderComponent()}
 </div>
     </div>
-    
+    </div>
   );
 }
 

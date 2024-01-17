@@ -3,13 +3,14 @@ import NavHeader from '../NavHeader/NavHeader'
 import image from "../../../assets/img.jpg";
 import webq from "../../../assets/WebQmedia-Official-Logo.svg"
 import ColorThief from 'colorthief';
-function InstaStory({setHeaderSize, getComponentRef}) {
+function InstaStory({setHeaderSize, mobile, format}) {
   const [profileImgs, setProfileImgs] = useState("");
   const [uploadedImages, setUploadedImages] = useState(image);
   const [bgGradient, setBgGradient] = useState('linear-gradient(to right, #ffffff, #ffffff)');
   const imgRef = useRef(null);
   const myRef = useRef(null);
-  
+  const fileInputRef = useRef(null);
+
   useEffect(() => {
     setHeaderSize('320px');
   }, [setHeaderSize]);
@@ -61,17 +62,31 @@ const extractColors = () => {
     setBgGradient(gradient);
   };
 
+  const handleImageClick = () => {
+    if (format === '1:1') {
+      fileInputRef.current.click();
+    }
+  };
+  const placeholderStyle = {
+    width: '100%',
+    height: '344px',
+    marginTop: '28px',
+    marginBottom: '20px'
+  };
+  
   return (
-    <div ref={myRef} className="w-[320px] m-auto">
+    <div ref={myRef} className="w-[320px] h-[602px] m-auto relative">
+{format=='1:1' ? (
+<img className="absolute h-full object-cover z-5 rounded-[10px]" onClick={handleImageClick} src={uploadedImages} alt="" />
+):('')}
 
-
-    <div className=' pt-3 m-auto' style={{background: bgGradient,borderRadius:'10px'}}>
+    <div className=' pt-3 m-auto h-full' style={{background: bgGradient,borderRadius:'10px'}}>
         <div className="container-div">
     <div className="loading-div"></div>
 </div>
 
         <div className="flex justify-between ps-3 pe-3 pt-3 ">
-        <div className='flex gap-2 items-center'>
+        <div className='flex gap-2 items-center z-10'>
         <label
             htmlFor="profile-upload"
             className="profile-label cursor-pointer"
@@ -157,8 +172,8 @@ const extractColors = () => {
         <svg width={25} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Menu / Close_SM"> <path id="Vector" d="M16 16L12 12M12 12L8 8M12 12L16 8M12 12L8 16" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g> </g></svg>
                 </div>       
         </div>
-
-        <label htmlFor="upload-ad-image" className="cursor-pointer banner-img  ">
+{format=='1:1' ? ( <div style={placeholderStyle}></div>):(
+        <label htmlFor="upload-ad-image" className="cursor-pointer banner-img ">
         <img
         ref={imgRef}
           src={uploadedImages}
@@ -167,7 +182,7 @@ const extractColors = () => {
           className="w-full h-[200px] mt-28 mb-20 "
         />
         <svg
-          className="pen-icon2"
+          className="pen-icon2 me-32 mt-7"
           width={20}
           fill="#ffffff"
           viewBox="0 0 1920 1920"
@@ -190,7 +205,9 @@ const extractColors = () => {
           </g>
         </svg>
       </label>
+      )}
       <input
+      ref={fileInputRef}
         id="upload-ad-image"
         type="file"
         accept="image/*"
@@ -198,11 +215,11 @@ const extractColors = () => {
         style={{ display: "none" }}
       />
       
-      <h3 className="text-white text-md font-medium ps-5 " contentEditable={true}><span className="input-hover">Try Ad MockUp free Now</span></h3>
+      <h3 className={`text-white text-md font-medium ps-5 ${format=='1:1' ? 'hidden' :'block'} `} contentEditable={true}><span className="input-hover">Try Ad MockUp free Now</span></h3>
 
 
       <div className="icons flex justify-evenly pt-16 pb-3">
-        <button className=" button-nxt  text-black font-bold m-auto p-2 ps-8 pe-8 rounded-lg bg-white " contentEditable={true}>
+        <button className=" button-nxt  text-black font-bold m-auto p-2 ps-8 pe-8 rounded-2xl bg-white " contentEditable={true}>
        <svg width={15} data-v-46e5644d="" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 256 256" xml:space="preserve"><g data-v-46e5644d=""><g data-v-46e5644d=""><polygon data-v-46e5644d="" points="79.093,0 48.907,30.187 146.72,128 48.907,225.813 79.093,256 207.093,128 "></polygon></g></g><g data-v-46e5644d=""></g><g data-v-46e5644d=""></g><g data-v-46e5644d=""></g><g data-v-46e5644d=""></g><g data-v-46e5644d=""></g><g data-v-46e5644d=""></g><g data-v-46e5644d=""></g><g data-v-46e5644d=""></g><g data-v-46e5644d=""></g><g data-v-46e5644d=""></g><g data-v-46e5644d=""></g><g data-v-46e5644d=""></g><g data-v-46e5644d=""></g><g data-v-46e5644d=""></g><g data-v-46e5644d=""></g></svg>
           <span className="input-hover">Download</span>
         </button>

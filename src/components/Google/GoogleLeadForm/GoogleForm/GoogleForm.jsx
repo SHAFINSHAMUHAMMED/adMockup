@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
-function GoogleForm({setHeaderSize}) {
+function GoogleForm({setHeaderSize, mobile}) {
   const [selectedImage, setSelectedImage] = useState(null);
   const [isHovered, setIsHovered] = useState(false);
   const [questions, setQuestions] = useState([
@@ -12,8 +12,13 @@ function GoogleForm({setHeaderSize}) {
   const imageInputRef = useRef(null);
 
   useEffect(() => {
-    setHeaderSize('390px');
-  }, [setHeaderSize]);
+    if(mobile){
+        setHeaderSize('370px');
+    }else{
+        setHeaderSize('390px')
+    }
+   
+  }, [setHeaderSize,mobile]);
 
   // Function to remove a questionss
   const removeQuestion = (id) => {
@@ -88,7 +93,7 @@ function GoogleForm({setHeaderSize}) {
   return (
     <>
       <div
-        className="max-w-[390px] p-6 m-auto relative border border-gray-300 border-b-0  rounded-md rounded-b-none"
+        className={`${mobile ? 'max-w-[330px]':'max-w-[390px]'} p-6 m-auto relative border border-gray-300 border-b-0  rounded-md rounded-b-none`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
@@ -320,16 +325,17 @@ function GoogleForm({setHeaderSize}) {
             )}
           </div>
         )}
-        <p className="text-[12px] leading-4 p-1 ">
+        <p className="text-[13px] text-gray-600 font-normal p-1 ">
           By submitting, you agree to send your info to Business name so that
           they can contact you about the above request. Business name agrees to
           use your info in accordance with their privacy policy. Google will
           also use your info in accordance with our privacy policy.
         </p>
       </div>
-      <div className="max-w-[390px] m-auto relative border border-gray-300 border-t-0 rounded-md rounded-t-none text-right ">
+      <div className={` ${mobile ? 'max-w-[330px]' : 'max-w-[390px]'} m-auto relative border border-gray-300 border-t-0 rounded-md rounded-t-none text-right `}>
         <hr />
-        <button className="bg-blue-600 text-white font-medium p-1 ps-4 pe-4 rounded-md me-3 mt-3 mb-3">
+        
+        <button className={`bg-[#1a73e8]   ${mobile ? 'w-[95%] flex justify-center m-auto' : 'me-2'} text-white font-medium p-1 ps-4 pe-4 rounded-md mt-3 mb-3`}>
           Submit
         </button>
       </div>

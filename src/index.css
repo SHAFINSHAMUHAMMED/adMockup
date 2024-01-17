@@ -287,3 +287,19 @@
   display: flex;
   gap:10px;
 }
+.google-settings-card {
+    margin: auto;
+    z-index: 100;
+    position: absolute;
+    top: 40px;
+    right: 15px;
+    border: 1px solid rgba(128, 128, 128, 0.385);
+}
+.google-opton-card {
+  position: absolute;
+    top: 40px;
+    right: 15px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+}

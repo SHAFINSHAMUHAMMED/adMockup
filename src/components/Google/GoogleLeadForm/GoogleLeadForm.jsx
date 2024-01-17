@@ -6,10 +6,6 @@ import SubmissionMessage from './SubmissionMessage/SubmissionMessage'
 
 function GoogleLeadForm({setHeaderSize,mobile}) {
   const [activeComponent, setActiveComponent] = useState('Ad');
-
-  // useEffect(() => {
-  //   setHeaderSize('532px');
-  // }, [setHeaderSize]);
   
   const renderActiveComponent = () => {
     switch (activeComponent) {

@@ -3,14 +3,20 @@ import image from "../../../assets/img.jpg";
 import webq from '../../../assets/WebQmedia-Official-Logo.svg'
 import NavHeader from '../NavHeader/NavHeader'
 
-function InstaFeeds({setHeaderSize,getComponentRef}) {
+function InstaFeeds({setHeaderSize,mobile}) {
+
   const [profileImg, setProfileImg] = useState("");
   const [uploadedImage, setUploadedImage] = useState(image);
   const myRef = useRef(null);
 
   useEffect(() => {
-    setHeaderSize('490px');
-  }, [setHeaderSize]);
+    if(mobile){
+        setHeaderSize('320px');
+    }else{
+        setHeaderSize('496px')
+    }
+   
+  }, [setHeaderSize,mobile]);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -30,10 +36,10 @@ function InstaFeeds({setHeaderSize,getComponentRef}) {
   };
 
   return (
-    <div ref={myRef} className=" bg-white max-w-[496px] m-auto ">
+    <div ref={myRef} className={` bg-white ${mobile ? 'max-w-[320px]':'max-w-[496px]'} m-auto `}>
       <div className="border border-gray-300 rounded z-1 p-[12px]">
       <div className="flex justify-between items-start p-4 pb-0 bg-white">
-        <div className="flex mb-2">
+        <div className="flex mb-2 items-center">
           <label
             htmlFor="profile-upload"
             className="profile-label cursor-pointer"
@@ -42,14 +48,10 @@ function InstaFeeds({setHeaderSize,getComponentRef}) {
               <img
                 src={profileImg}
                 alt="User avatar"
-                className="rounded-full object-cover z-1"
-                style={{
-                  width: "60px",
-                  height: "60px",
-                }}
+                className={`rounded-full object-cover z-1 ${mobile ? 'w-[35px] h-[35px]' :'w-[60px] h-[60px] '} `}
               />
             ) : (
-                <img className=" rounded-full object-contain z-1 border p-1" src={webq} alt=""  style={{ width: "60px", height: "60px" }} />
+                <img className={ `rounded-full object-contain z-1 border p-1 ${mobile ? 'w-[35px] h-[35px]' :'w-[60px] h-[60px] '}`} src={webq} alt=""   />
               
             )}
             <svg
@@ -90,11 +92,11 @@ function InstaFeeds({setHeaderSize,getComponentRef}) {
             onChange={handleImageChange}
             style={{ display: "none" }}
           />
-          <div className="ml-3 mt-2">
+          <div className={` ${mobile ? 'ml-1 mt-0' : 'ml-3 mt-2'}`}>
             <h4
               type="text"
-              className="ps-1 input-hover w-[100%] font-semibold"
-              style={{ outline: "none", fontSize:'16px' }}
+              className={`ps-1 input-hover w-[100%] font-semibold ${mobile ? 'text-[14px]' : 'text-[16px]'}`}
+              style={{ outline: "none" }}
               contentEditable={true}
             >
               companyName
@@ -106,6 +108,7 @@ function InstaFeeds({setHeaderSize,getComponentRef}) {
         </div>
         <svg
           width={20}
+          className={`${mobile ? 'rotate-90' : ''}`}
           data-v-46e5644d=""
           fill="currentColor"
           viewBox="0 0 20 20"
@@ -127,7 +130,7 @@ function InstaFeeds({setHeaderSize,getComponentRef}) {
         <img
           src={uploadedImage}
           alt="Ad"
-          className="w-full max-h-[245px]"
+          className={` ${mobile ? 'w-full h-[229px]' : 'w-full h-[338px]'}`}
         />
         <svg
           className="pen-icon2"

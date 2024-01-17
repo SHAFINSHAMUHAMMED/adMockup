@@ -1,40 +1,53 @@
-import React, { useState,useRef,useEffect } from 'react';
-import Text from './Text/GoogleText';
-import GoogleLeadForm from './GoogleLeadForm/GoogleLeadForm';
-import domtoimage from 'dom-to-image';
-
+import React, { useState, useRef, useEffect } from "react";
+import Text from "./Text/GoogleText";
+import GoogleLeadForm from "./GoogleLeadForm/GoogleLeadForm";
+import Call from "./Call/Call";
+import domtoimage from "dom-to-image";
 
 function Google() {
-  const [activeComponent, setActiveComponent] = useState("feeds");
+  const [activeComponent, setActiveComponent] = useState("text");
   const [headerSize, setHeaderSize] = useState("632px");
   const componentRef = useRef(null);
   const [setting, setSetting] = useState(false);
   const [options, setOptions] = useState(false);
-  const [mobile, setMobile] = useState (false)
+  const [mobile, setMobile] = useState(false);
+
+  const [setlink, setsetlink] = useState(false);
+  const [callout, setcallout] = useState(false);
+  const [snippet, setsnippet] = useState(false);
+  const [callExt, setcallExt] = useState(false);
+
+
   const ref = useRef(null);
   const reff = useRef(null);
 
   const handleIconClick = (componentName) => {
     setActiveComponent(componentName);
     setSetting(false);
+    setsetlink(false)
+    setcallout(false)
+    setsnippet(false)
+    setcallExt(false)
   };
-const isCardActive = (componentName) => {
-  return activeComponent === componentName ? "option-card option-card-active" : "option-card";
-};
-
+  const isCardActive = (componentName) => {
+    return activeComponent === componentName
+      ? "option-card option-card-active"
+      : "option-card";
+  };
 
   const handleDownload = (imageType) => {
     console.log(componentRef.current);
-    domtoimage.toPng(componentRef.current)
+    domtoimage
+      .toPng(componentRef.current)
       .then((dataUrl) => {
-        setOptions(false)
-        const link = document.createElement('a');
+        setOptions(false);
+        const link = document.createElement("a");
         link.download = `my-image.${imageType}`;
         link.href = dataUrl;
         link.click();
       })
       .catch((error) => {
-        console.error('Something went wrong!', error);
+        console.error("Something went wrong!", error);
       });
   };
   const handleClickOutside = (event) => {
@@ -43,7 +56,7 @@ const isCardActive = (componentName) => {
       setOptions(false);
     }
   };
-  
+
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
@@ -54,20 +67,60 @@ const isCardActive = (componentName) => {
   const renderComponent = () => {
     switch (activeComponent) {
       case "text":
-        return <Text setHeaderSize={setHeaderSize} mobile={mobile} />;
+        return <Text 
+        setHeaderSize={setHeaderSize} 
+        mobile={mobile} 
+        setlink={setlink}
+        callout={callout}
+        snippet={snippet}
+        callExt={callExt}/>;
       case "leadForm":
         return <GoogleLeadForm setHeaderSize={setHeaderSize} mobile={mobile} />;
+      case "call":
+        return <Call setHeaderSize={setHeaderSize} mobile={mobile} />;
       default:
-        return <Text  setHeaderSize={setHeaderSize} mobile={mobile} />;
+        return <Text
+        setHeaderSize={setHeaderSize} 
+        mobile={mobile} 
+        setlink={setlink}
+        callout={callout}
+        snippet={snippet}
+        callExt={callExt} />;
     }
   };
 
   return (
-    <div style={{maxWidth:headerSize}} ref={reff}   className="navbar nav-header-main bg-white m-auto mt-16" onClick={(e) => e.stopPropagation()}>
+    <div className="flex">
+    <div
+      style={{  minWidth: headerSize, maxWidth:'900px' }}
+      ref={reff}
+      className="navbar nav-header-main bg-white m-auto mt-16"
+      onClick={(e) => e.stopPropagation()}
+    >
       <div className="navigation-icons flex justify-end pt-2 pb-2 gap-5">
         {/* Icon 1 */}
         <div className="nav-icon" onClick={() => setMobile(!mobile)}>
-        <svg className='mobile-icon' fill="#403f3f" width={25} viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" stroke="#403f3f"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>mobile</title> <path d="M22 0.75h-12c-1.794 0.002-3.248 1.456-3.25 3.25v24c0.002 1.794 1.456 3.248 3.25 3.25h12c1.794-0.001 3.249-1.456 3.25-3.25v-24c-0.002-1.794-1.456-3.248-3.25-3.25h-0zM22.75 28c-0 0.414-0.336 0.75-0.75 0.75h-12c-0.414-0-0.75-0.336-0.75-0.75v-24c0.001-0.414 0.336-0.749 0.75-0.75h12c0.414 0 0.75 0.336 0.75 0.75v0zM18 25.25h-4c-0.69 0-1.25 0.56-1.25 1.25s0.56 1.25 1.25 1.25v0h4c0.69 0 1.25-0.56 1.25-1.25s-0.56-1.25-1.25-1.25v0z"></path> </g></svg>
+          <svg
+            className="mobile-icon"
+            fill={mobile ? "#2263db" : "#403f3f"}
+            width={25}
+            viewBox="0 0 32 32"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            stroke={mobile ? "#2263db" : "#403f3f"}
+          >
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g
+              id="SVGRepo_tracerCarrier"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></g>
+            <g id="SVGRepo_iconCarrier">
+              {" "}
+              <title>mobile</title>{" "}
+              <path d="M22 0.75h-12c-1.794 0.002-3.248 1.456-3.25 3.25v24c0.002 1.794 1.456 3.248 3.25 3.25h12c1.794-0.001 3.249-1.456 3.25-3.25v-24c-0.002-1.794-1.456-3.248-3.25-3.25h-0zM22.75 28c-0 0.414-0.336 0.75-0.75 0.75h-12c-0.414-0-0.75-0.336-0.75-0.75v-24c0.001-0.414 0.336-0.749 0.75-0.75h12c0.414 0 0.75 0.336 0.75 0.75v0zM18 25.25h-4c-0.69 0-1.25 0.56-1.25 1.25s0.56 1.25 1.25 1.25v0h4c0.69 0 1.25-0.56 1.25-1.25s-0.56-1.25-1.25-1.25v0z"></path>{" "}
+            </g>
+          </svg>
         </div>
         <div className="nav-icon" onClick={() => setSetting(!setting)}>
           <svg
@@ -122,8 +175,8 @@ const isCardActive = (componentName) => {
           </svg>
         </div>
         {setting ? (
-          <div className="settings-card drop-shadow-md  bg-white rounded-md p-5">
-            <h4 className="text-lg font-semibold ps-5">Ad Type</h4>
+          <div className="google-settings-card drop-shadow-md  bg-white rounded-md p-5">
+            <h4 className="text-lg font-semibold ps-5 mb-2">Ad Type</h4>
             <div className="flex items-center justify-center p-5 z-10 max-h-[80px]">
               <div
                 className={`option-card ${isCardActive("text")}`}
@@ -297,54 +350,74 @@ const isCardActive = (componentName) => {
                 onClick={() => handleIconClick("call")}
               >
                 <svg
-                  width={35}
-                  viewBox="0 0 48 48"
-                  version="1.1"
                   xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink"
-                  fill="#000000"
+                  width="35"
+                  height="35"
+                  viewBox="0 0 65 65"
+                  fill="none"
                 >
-                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                  <g
-                    id="SVGRepo_tracerCarrier"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  ></g>
-                  <g id="SVGRepo_iconCarrier">
-                    <g
-                      id="Icons"
-                      stroke="none"
-                      stroke-width="1"
-                      fill="none"
-                      fill-rule="evenodd"
-                    >
-                      {" "}
-                      <g
-                        id="Color-"
-                        transform="translate(-301.000000, -860.000000)"
-                        fill="#007FFF"
-                      >
-                        {" "}
-                        <path
-                          d="M325,860 C311.745143,860 301,869.949185 301,882.222222 C301,889.215556 304.489988,895.453481 309.944099,899.526963 L309.944099,908 L318.115876,903.515111 C320.296745,904.118667 322.607155,904.444444 325,904.444444 C338.254857,904.444444 349,894.495259 349,882.222222 C349,869.949185 338.254857,860 325,860 L325,860 Z M327.385093,889.925926 L321.273292,883.407407 L309.347826,889.925926 L322.465839,876 L328.726708,882.518519 L340.503106,876 L327.385093,889.925926 L327.385093,889.925926 Z"
-                          id="Messenger"
-                        >
-                          {" "}
-                        </path>{" "}
-                      </g>{" "}
-                    </g>{" "}
-                  </g>
+                  <path
+                    d="M60.8028 46.9906C60.1401 46.2847 57.8004 44.1976 53.4992 41.4364C49.1663 38.651 45.9709 36.9143 45.0543 36.5093C44.9735 36.4735 44.8845 36.4604 44.7968 36.4713C44.7091 36.4823 44.6261 36.5169 44.5566 36.5715C43.0802 37.723 40.5944 39.838 40.4611 39.9523C39.6004 40.6899 39.6004 40.6899 38.8958 40.4601C37.6567 40.0539 33.8075 38.0099 30.4534 34.6482C27.0993 31.2865 24.95 27.3421 24.5438 26.1043C24.3114 25.3984 24.3114 25.3984 25.0516 24.5377C25.1658 24.4044 27.2821 21.9186 28.4336 20.4434C28.4882 20.3739 28.5229 20.2909 28.5338 20.2032C28.5448 20.1155 28.5316 20.0265 28.4958 19.9458C28.0908 19.0279 26.3541 15.8338 23.5688 11.5008C20.8037 7.20094 18.7191 4.86119 18.0133 4.1985C17.9485 4.13737 17.8684 4.09485 17.7815 4.07541C17.6946 4.05598 17.6041 4.06034 17.5194 4.08805C15.0521 4.93595 12.6714 6.01786 10.4101 7.319C8.227 8.58806 6.16023 10.0473 4.23379 11.6798C4.16654 11.737 4.11613 11.8114 4.08795 11.8951C4.05977 11.9787 4.05489 12.0684 4.07383 12.1546C4.33916 13.3912 5.60742 18.5531 9.54297 25.7031C13.5585 33.0004 16.3413 36.7391 22.2383 42.6158C28.1353 48.4924 31.9921 51.4428 39.297 55.4584C46.447 59.3939 51.6114 60.6634 52.8454 60.9262C52.9318 60.945 53.0217 60.94 53.1055 60.9119C53.1893 60.8837 53.2639 60.8334 53.3215 60.7663C54.9537 58.8399 56.4126 56.7731 57.6811 54.59C58.982 52.3285 60.0639 49.9479 60.912 47.4806C60.9391 47.3966 60.9433 47.3069 60.9241 47.2207C60.9049 47.1346 60.8631 47.0551 60.8028 46.9906Z"
+                    fill="#007FFF"
+                  />
                 </svg>
-                <h5 className="text-sm">Callll</h5>
-              </div>        
+                <h5 className="text-sm">Call</h5>
+              </div>
             </div>
+            {/* //toggle button option// */}
+            {activeComponent=='text' ? (
+            <div className="mt-5 ps-5">
+              <h4 className="font-medium text-[18px] pb-3">Ad Options</h4>
+              <ul >
+                <li className="pb-2 text-gray-600">
+                  <label class="relative inline-flex items-center cursor-pointer">
+                    <input checked={setlink} onChange={(e) => setsetlink(e.target.checked)} type="checkbox" value="" class="sr-only peer" />
+                    <div class="w-10 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-0  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[0px] after:start-[0px] after:bg-white after:drop-shadow-xl after:border-gray-100 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                    <span class="ms-3 text-sm font-medium">
+                      Sitelink Extension
+                    </span>
+                  </label>
+                </li>
+                <li className="pb-2 text-gray-600">
+                  <label class="relative inline-flex items-center cursor-pointer">
+                    <input checked={callout}  onChange={(e) => setcallout(e.target.checked)} type="checkbox" value="" class="sr-only peer" />
+                    <div class="w-10 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-0  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[0px] after:start-[0px] after:bg-white after:drop-shadow-xl after:border-gray-100 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                    <span class="ms-3 text-sm font-medium">
+                    Callout Extension
+                    </span>
+                  </label>
+                </li>
+                <li className="pb-2 text-gray-600">
+                  <label class="relative inline-flex items-center cursor-pointer">
+                    <input checked={snippet}  onChange={(e) => setsnippet(e.target.checked)} type="checkbox" value="" class="sr-only peer" />
+                    <div class="w-10 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-0  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[0px] after:start-[0px] after:bg-white after:drop-shadow-xl after:border-gray-100 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                    <span class="ms-3 text-sm font-medium">
+                    Structured Snippet Extension
+                    </span>
+                  </label>
+                </li>
+                <li className="pb-2 text-gray-600">
+                  <label class="relative inline-flex items-center cursor-pointer">
+                    <input checked={callExt}  onChange={(e) => setcallExt(e.target.checked)} type="checkbox" value="" class="sr-only peer" />
+                    <div class="w-10 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-0  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[0px] after:start-[0px] after:bg-white after:drop-shadow-xl after:border-gray-100 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                    <span class="ms-3 text-sm font-medium ">
+                    Call Extension
+                    </span>
+                  </label>
+                </li>
+              </ul>
+            </div>
+            ):('')}
           </div>
         ) : (
           ""
         )}
         {options ? (
-          <div className="  opton-card p-5 rounded-md z-10">
-            <div className="flex gap-3 mb-4" onClick={() => handleDownload('png')}>
+          <div className="  google-opton-card p-5 rounded-md z-10">
+            <div
+              className="flex gap-3 mb-4"
+              onClick={() => handleDownload("png")}
+            >
               <svg
                 width="25"
                 viewBox="0 0 35 35"
@@ -378,7 +451,7 @@ const isCardActive = (componentName) => {
 
               <p>Download PNG</p>
             </div>
-            <div className="flex gap-3" onClick={() => handleDownload('jpg')}>
+            <div className="flex gap-3" onClick={() => handleDownload("jpg")}>
               <svg
                 width="25"
                 viewBox="0 0 35 35"
@@ -417,11 +490,15 @@ const isCardActive = (componentName) => {
           ""
         )}
       </div>
-      <div className="drop-shadow-lg rounded-lg" ref={componentRef} style={{ width: '100%', overflow: 'hidden' }}>
-  {renderComponent()}
-</div>
+      <div
+        className="drop-shadow-lg rounded-lg p-4 "
+        ref={componentRef}
+        style={{ width: "100%", overflow: "hidden" }}
+      >
+        {renderComponent()}
+      </div>
     </div>
-    
+    </div>
   );
 }
 
