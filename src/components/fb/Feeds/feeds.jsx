@@ -172,7 +172,7 @@ function Feeds({ setHeaderSize, mobile }) {
       </div>
       <h5 className="ps-4 pt-3 pb-2 w-full font-medium bg-white">
         {" "}
-        <span className="input-hover">Try Ad Mocup Now! its free </span>
+        <span className="input-hover" contentEditable={true}>Try Ad Mocup Now! its free </span>
       </h5>
 
       <label htmlFor="upload-ad-image" className="cursor-pointer banner-img">
