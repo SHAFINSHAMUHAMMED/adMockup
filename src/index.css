@@ -3,303 +3,351 @@
 @tailwind utilities;
 
 .input-hover {
-    outline: none;
-    border: 2px solid transparent;
-    transition: border-color 0.2s;
+  outline: none;
+  border: 2px solid transparent;
+  transition: border-color 0.2s;
 
-  }
-  
-  .input-hover:hover {
-    border-style: dotted;
-    border-color: #817d7d;
-  }
+}
+
+.input-hover:hover {
+  border-style: dotted;
+  border-color: #817d7d;
+}
+
 .profile-label {
-    position: relative;
+  position: relative;
 }
-  .profile-label .pen-icon {
-    display: none;
-    position: absolute;
-    bottom: 50%;
-    right: 10%;
-  }
-  .svg-container {
-    display: inline-block;
-    border-radius: 50%;
-    padding: 5px;
-    background-color: rgba(255, 255, 255, 0.3); 
+
+.profile-label .pen-icon {
+  display: none;
+  position: absolute;
+  bottom: 50%;
+  right: 10%;
 }
+
+.svg-container {
+  display: inline-block;
+  border-radius: 50%;
+  padding: 5px;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
 .svg-container svg {
   fill: white;
 }
-  .profile-label:hover .pen-icon {
-    display: block;
-  }
-  
-  .profile-img-placeholder {
-    position: relative;
-  }
- 
-  .banner-img {
-    position: relative;
-    object-fit: contain;
-  }
-  
-  .banner-img .pen-icon2 {
-    display: none;
-    position: absolute;
-    top: 60px;
-    right: 20px; 
-  }
-  
-  .banner-img:hover .pen-icon2 {
-    display: block;
-  }
-  
-  .dropdown-container {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .dropdown-button {
-    padding: 10px 20px;
-    cursor: pointer;
-    border: 1px solid #ccc;
-    background-color: #f8f8f8;
-    border-radius: 4px;
-    outline: none;
-  }
-  
-  .dropdown-options {
-    position: absolute;
-    background-color: #fff;
-    min-width: 160px;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    border: 1px solid #ddd;
-    z-index: 1;
-  }
-  
-  .dropdown-option {
-    padding: 12px 16px;
-    cursor: pointer;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .dropdown-option:last-child {
-    border-bottom: none;
-  }
-  
-  .dropdown-option:hover {
-    background-color: #f1f1f1;
-  }
+
+.profile-label:hover .pen-icon {
+  display: block;
+}
+
+.profile-img-placeholder {
+  position: relative;
+}
+
+.banner-img {
+  position: relative;
+  object-fit: contain;
+}
+
+.banner-img .pen-icon2 {
+  display: none;
+  position: absolute;
+  top: 60px;
+  right: 20px;
+}
+
+.banner-img:hover .pen-icon2 {
+  display: block;
+}
+
+.dropdown-container {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-button {
+  padding: 10px 20px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  background-color: #f8f8f8;
+  border-radius: 4px;
+  outline: none;
+}
+
+.dropdown-options {
+  position: absolute;
+  background-color: #fff;
+  min-width: 160px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  border: 1px solid #ddd;
+  z-index: 1;
+}
+
+.dropdown-option {
+  padding: 12px 16px;
+  cursor: pointer;
+  border-bottom: 1px solid #ddd;
+}
+
+.dropdown-option:last-child {
+  border-bottom: none;
+}
+
+.dropdown-option:hover {
+  background-color: #f1f1f1;
+}
+
 .h5-hover {
-    font-size: 15px;
+  font-size: 15px;
 }
-  .h5-hover:hover {
-    cursor: pointer;
-    border-bottom: 2px solid gray;
-    display: block;
-  }
+
+.h5-hover:hover {
+  cursor: pointer;
+  border-bottom: 2px solid gray;
+  display: block;
+}
+
 .question-main {
-    transform: translateY(-40px);
-    position: relative;
+  transform: translateY(-40px);
+  position: relative;
 }
+
 .question-container {
-    position: relative;
+  position: relative;
 }
-  .icon-close {
-    display: none;
-    color: #6e6e6e;
-    position: absolute;
-    right: 30px;
-    top:20px;
-  }
-  .question-container:hover .icon-close {
-    display: block;
-  }
-  
 
-  .questions-input-container {
-    position: relative;
-    text-align: center;
-  }
-  
-  .btn-add-question {
-    background-color: #f3f3f3;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-  }
-  
-  .inline-dropdown {
-    list-style: none;
-    padding: 20px;
-    margin: 0;
-    position: absolute;
-    background-color: #fff;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    width: 50%;
-    bottom: 100%;
-    transform: translateX(-50%);
-    left: 50%;
-    z-index: 1;
-    text-align: left;
-    height: 300px;
-    overflow-y: auto;
-  }
-  
-  .inline-dropdown-item {
+.icon-close {
+  display: none;
+  color: #6e6e6e;
+  position: absolute;
+  right: 30px;
+  top: 20px;
+}
 
-    padding-bottom: 5px;
-    padding-left: 10px;
-    text-decoration: none;
-    display: block;
-    color: black;
-  }
-  
-  .inline-dropdown-item:hover {
-    background-color: #ddd;
-  }
-  .thank-profile {
-    position: absolute;
-    top: -30px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  .h5-hover.active {
-    color: black; 
-    border-bottom: 2px solid gray;
-  }
-  .button-nxt {
-    position: relative;
-  }
-  .button-nxt svg {
-    fill: white;
-    position: absolute;
-    top: -20px;
-    left: 45%;
-    transform: rotate(-90deg);
-  }
-  .option-card {
-    border: 1px solid gray;
-    width: 100px;
-    padding:10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-weight: 600;
-  }
-  .option-card-active {
-    background-color: rgb(204, 211, 214);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transform: translateY(-2px);
-    border: 1px solid rgba(44, 43, 43, 0.2);
-  }
+.question-container:hover .icon-close {
+  display: block;
+}
 
-  .nav-icons {
-    position: relative;
-  }
-  .settings-card {
-    max-width: 100%;
-    z-index: 100;
-    position: absolute;
-    top: 110px;
-    right: 0;
-  }
-  .optons-card {
-    position: absolute;
-    top: 110px;
-    right: 0;
-    background-color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 
-  }
-  .navigation-icons {
-    position: relative;
-  }
-  .setting-card {
-    max-width: 100%;
-    margin: auto;
-    z-index: 100;
-    position: absolute;
-    top: 40px;
-    right: 0;
-    border: 1px solid rgba(128, 128, 128, 0.385);
-  }
-  .opton-card {
-    position: absolute;
-    top: 40px;
-    right: 0;
-    background-color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+.questions-input-container {
+  position: relative;
+  text-align: center;
+}
 
-  }
+.btn-add-question {
+  background-color: #f3f3f3;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
 
-  .container-div {
-    width: 95%;
-    height: 2px;
-    background-color: gray;
-    margin: auto;
-    border-radius: 1px;
-    position: relative; /* Important for absolute positioning of the inner div */
-    overflow: hidden; /* Ensures the inner div doesn't overflow */
+.inline-dropdown {
+  list-style: none;
+  padding: 20px;
+  margin: 0;
+  position: absolute;
+  background-color: #fff;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  width: 50%;
+  bottom: 100%;
+  transform: translateX(-50%);
+  left: 50%;
+  z-index: 1;
+  text-align: left;
+  height: 300px;
+  overflow-y: auto;
+}
+
+.inline-dropdown-item {
+
+  padding-bottom: 5px;
+  padding-left: 10px;
+  text-decoration: none;
+  display: block;
+  color: black;
+}
+
+.inline-dropdown-item:hover {
+  background-color: #ddd;
+}
+
+.thank-profile {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.h5-hover.active {
+  color: black;
+  border-bottom: 2px solid gray;
+}
+
+.button-nxt {
+  position: relative;
+}
+
+.button-nxt svg {
+  fill: white;
+  position: absolute;
+  top: -20px;
+  left: 45%;
+  transform: rotate(-90deg);
+}
+
+.option-card {
+  border: 1px solid gray;
+  width: 100px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  filter: opacity(.3);
+}
+
+.option-card-active {
+  background-color: rgb(210, 224, 251);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: scale(1.03);
+  border: 1px solid rgba(44, 43, 43, 0.2);
+  filter: opacity(1);
+
+}
+
+.nav-icons {
+  position: relative;
+}
+
+.settings-card {
+  max-width: 100%;
+  z-index: 100;
+  position: absolute;
+  top: 110px;
+  right: 0;
+}
+
+.optons-card {
+  position: absolute;
+  top: 110px;
+  right: 0;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+}
+
+.navigation-icons {
+  position: relative;
+}
+
+.setting-card {
+  max-width: 100%;
+  margin: auto;
+  z-index: 100;
+  position: absolute;
+  top: 40px;
+  right: 0;
+  border: 1px solid rgba(128, 128, 128, 0.385);
+}
+
+.opton-card {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+}
+
+.container-div {
+  width: 95%;
+  height: 2px;
+  background-color: gray;
+  margin: auto;
+  border-radius: 1px;
+  position: relative;
+  /* Important for absolute positioning of the inner div */
+  overflow: hidden;
+  /* Ensures the inner div doesn't overflow */
 }
 
 .loading-div {
-    position: absolute;
-    height: 100%;
-    width: 0;
-    background-color: white; /* Color of the loading bar */
-    animation: loadingAnimation 6s ease-in-out infinite;
+  position: absolute;
+  height: 100%;
+  width: 0;
+  background-color: white;
+  /* Color of the loading bar */
+  animation: loadingAnimation 6s ease-in-out infinite;
 }
 
 @keyframes loadingAnimation {
-    0% { width: 1%; }
-    100% { width: 100%; }
+  0% {
+    width: 1%;
+  }
+
+  100% {
+    width: 100%;
+  }
 }
 
 .google-text {
   box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%);
   /* border-radius: 8px; */
 }
+
 .google-input {
   position: relative;
   border: 1px solid rgba(120, 120, 120, 0.41);
   border-radius: 5px;
 }
-.google-icon-close{
+
+.google-icon-close {
   position: absolute;
   color: rgba(128, 128, 128, 0.697);
   font-size: 13px;
   right: 10px;
-  top:30%;
+  top: 30%;
 }
+
 .google-sel-img {
   position: relative;
 }
+
 .google-img-buttons {
   display: none;
   position: absolute;
   top: 20px;
   right: 20px;
 }
-.google-sel-img:hover .google-img-buttons{
+
+.google-sel-img:hover .google-img-buttons {
   display: flex;
-  gap:10px;
+  gap: 10px;
 }
+
 .google-settings-card {
-    margin: auto;
-    z-index: 100;
-    position: absolute;
-    top: 40px;
-    right: 15px;
-    border: 1px solid rgba(128, 128, 128, 0.385);
+  margin: auto;
+  z-index: 100;
+  position: absolute;
+  top: 40px;
+  right: 15px;
+  border: 1px solid rgba(128, 128, 128, 0.385);
 }
+
 .google-opton-card {
   position: absolute;
-    top: 40px;
-    right: 15px;
-    background-color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  top: 40px;
+  right: 15px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 
+}
+
+.penIcon {
+  display: none;
+}
+
+.full-image:hover .penIcon {
+  display: block;
 }

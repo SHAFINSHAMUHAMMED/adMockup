@@ -1,8 +1,21 @@
 import React, { useState, useEffect, useRef } from "react";
 import image from "../../../../assets/img.jpg";
-function PrivacyPolicy() {
-
+function PrivacyPolicy({ setHeaderSize, mobile }) {
   const [uploadedImage, setUploadedImage] = useState(image);
+
+  useEffect(() => {
+    if (window.innerWidth <= 768) {
+      // Example breakpoint for mobile devices
+      setHeaderSize("100%");
+    } else {
+      if (mobile) {
+        setHeaderSize("375px");
+      } else {
+        setHeaderSize("524px");
+      }
+    }
+  }, [setHeaderSize, mobile]);
+
   const handleImageChange2 = (e) => {
     const file = e.target.files[0];
     if (file && file.type.substr(0, 5) === "image") {
@@ -14,13 +27,8 @@ function PrivacyPolicy() {
 
   return (
     <div className="border border-gray-300 bg-gray-200 rounded bottom-0 max-w-[530px]">
-
       <label htmlFor="upload-ad-image" className="cursor-pointer banner-img">
-        <img
-          src={uploadedImage}
-          alt="Ad"
-          className="w-full max-h-[260px]"
-        />
+        <img src={uploadedImage} alt="Ad" className="w-full max-h-[260px]" />
         <svg
           className="pen-icon2"
           width={20}
@@ -54,9 +62,19 @@ function PrivacyPolicy() {
       />
 
       <div className="question-main bg-white w-[95%] p-5 rounded-xl m-auto">
-        <h3 className="text-base font-medium input-hover " contentEditable={true}>Terms and Conditions for Mocup</h3>
-        <p className="  text-sm mt-2 mb-3 text-gray-400">By clicking Submit, you agree to send your info to webq who agrees to use it according to their privacy policy. Facebook will also use it subject to our Data Policy, including to auto-fill forms for ads. <u>View Facebook Data Policy</u>.</p>
-        </div>
+        <h3
+          className="text-base font-medium input-hover "
+          contentEditable={true}
+        >
+          Terms and Conditions for Mocup
+        </h3>
+        <p className="  text-sm mt-2 mb-3 text-gray-400">
+          By clicking Submit, you agree to send your info to webq who agrees to
+          use it according to their privacy policy. Facebook will also use it
+          subject to our Data Policy, including to auto-fill forms for ads.{" "}
+          <u>View Facebook Data Policy</u>.
+        </p>
+      </div>
       <div className="icons flex justify-evenly pt-3 pb-3 bg-white">
         <button className="bg-blue-500 w-[95%] text-white font-bold m-auto p-2 ps-8 pe-8 rounded-md">
           Submit

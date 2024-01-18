@@ -1,9 +1,22 @@
 import React, { useState, useEffect, useRef } from "react";
 import image from "../../../../assets/img.jpg";
 import fb from "../../../../assets/fblogo.webp";
-function question() {
-
+function question({ setHeaderSize, mobile }) {
   const [uploadedImage, setUploadedImage] = useState(image);
+
+  useEffect(() => {
+    if (window.innerWidth <= 768) {
+      // Example breakpoint for mobile devices
+      setHeaderSize("100%");
+    } else {
+      if (mobile) {
+        setHeaderSize("375px");
+      } else {
+        setHeaderSize("524px");
+      }
+    }
+  }, [setHeaderSize, mobile]);
+
   const handleImageChange2 = (e) => {
     const file = e.target.files[0];
     if (file && file.type.substr(0, 5) === "image") {
@@ -25,7 +38,7 @@ function question() {
     setQuestions(questions.filter((question) => question.id !== id));
   };
 
-  const handleSelectQuestion = (label,e) => {
+  const handleSelectQuestion = (label, e) => {
     e.preventDefault();
     const newId =
       questions.length > 0 ? Math.max(...questions.map((q) => q.id)) + 1 : 1;
@@ -37,7 +50,17 @@ function question() {
   };
 
   const dropdownOptions = [
-    "Name","Place","Email", "Phone", "First name", "Last name","Full name","Country","State","City","Pincode" // Add more optionsss
+    "Name",
+    "Place",
+    "Email",
+    "Phone",
+    "First name",
+    "Last name",
+    "Full name",
+    "Country",
+    "State",
+    "City",
+    "Pincode", // Add more optionsss
   ];
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -55,16 +78,10 @@ function question() {
     return () => window.removeEventListener("click", handleWindowClick);
   }, []);
 
-
   return (
     <div className="border border-gray-300 bg-gray-200 rounded-md">
-
       <label htmlFor="upload-ad-image" className="cursor-pointer banner-img">
-        <img
-          src={uploadedImage}
-          alt="Ad"
-          className="w-full max-h-[260px]"
-        />
+        <img src={uploadedImage} alt="Ad" className="w-full max-h-[260px]" />
         <svg
           className="pen-icon2"
           width={20}
@@ -99,10 +116,17 @@ function question() {
 
       <div className="question-main bg-white w-[95%] p-5 rounded-xl m-auto">
         <h3 className="text-2xl">Contact Information</h3>
-        <p className="text-lg mt-2 mb-3 input-hover" contentEditable={true}>Question Headline</p>
+        <p className="text-lg mt-2 mb-3 input-hover" contentEditable={true}>
+          Question Headline
+        </p>
         {questions.map((question) => (
-          <div key={question.id} className="question-container flex flex-col mb-3">
-            <label className="font-medium" htmlFor="">{question.label}</label>
+          <div
+            key={question.id}
+            className="question-container flex flex-col mb-3"
+          >
+            <label className="font-medium" htmlFor="">
+              {question.label}
+            </label>
             <input
               className="border-b-2 question-inp"
               type="text"
@@ -116,20 +140,26 @@ function question() {
             </button>
           </div>
         ))}
-         <div className="questions-input-container">
-        <button onClick={toggleDropdown} className="btn-add-question">+ Add Question</button>
-        {isDropdownOpen && (
-          <ul className="inline-dropdown">
-            {dropdownOptions.map(option => (
-              <li key={option}>
-                <a href="#" onClick={(e) => handleSelectQuestion(option,e)} className="inline-dropdown-item">
-                  {option}
-                </a>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+        <div className="questions-input-container">
+          <button onClick={toggleDropdown} className="btn-add-question">
+            + Add Question
+          </button>
+          {isDropdownOpen && (
+            <ul className="inline-dropdown">
+              {dropdownOptions.map((option) => (
+                <li key={option}>
+                  <a
+                    href="#"
+                    onClick={(e) => handleSelectQuestion(option, e)}
+                    className="inline-dropdown-item"
+                  >
+                    {option}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
       </div>
 
       <div className="icons flex justify-evenly pt-3 pb-3 bg-white">

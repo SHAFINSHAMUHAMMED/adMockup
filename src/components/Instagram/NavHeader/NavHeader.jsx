@@ -1,57 +1,62 @@
 import React, { useState, useEffect, useRef } from "react";
-import domtoimage from 'dom-to-image';
+import domtoimage from "dom-to-image";
 
-
-
-function NavHeader({ onActiveComponentChange, size, componentRef  }) {
+function NavHeader({ onActiveComponentChange, size, componentRef }) {
   const [setting, setSetting] = useState(false);
   const [options, setOptions] = useState(false);
   const [activeComponent, setActiveComponent] = useState("feeds");
   const ref = useRef(null);
   const reff = useRef(null);
-console.log(size);
+  console.log(size);
 
   const handleIconClick = (componentName) => {
     onActiveComponentChange(componentName);
     setActiveComponent(componentName);
     setSetting(false);
   };
-const isCardActive = (componentName) => {
-  return activeComponent === componentName ? "option-card option-card-active" : "option-card";
-};
-
+  const isCardActive = (componentName) => {
+    return activeComponent === componentName
+      ? "option-card option-card-active"
+      : "option-card";
+  };
 
   const handleDownload = (imageType) => {
     console.log(componentRef.current);
-    domtoimage.toPng(componentRef.current)
+    domtoimage
+      .toPng(componentRef.current)
       .then((dataUrl) => {
-        setOptions(false)
-        const link = document.createElement('a');
+        setOptions(false);
+        const link = document.createElement("a");
         link.download = `my-image.${imageType}`;
         link.href = dataUrl;
         link.click();
       })
       .catch((error) => {
-        console.error('Something went wrong!', error);
+        console.error("Something went wrong!", error);
       });
   };
-  
+
   const handleClickOutside = (event) => {
     if (reff.current && !reff.current.contains(event.target)) {
       setSetting(false);
       setOptions(false);
     }
   };
-  
+
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-  
+
   return (
-    <div ref={reff} style={{ width: size }}  className="navbar nav-header-main bg-white m-auto mt-16" onClick={(e) => e.stopPropagation()}>
+    <div
+      ref={reff}
+      style={{ width: size }}
+      className="navbar nav-header-main bg-white m-auto mt-16"
+      onClick={(e) => e.stopPropagation()}
+    >
       <div className="navigation-icons flex justify-end pt-2 pb-2 gap-5">
         {/* Icon 1 */}
         <div className="nav-icon" onClick={() => setSetting(!setting)}>
@@ -310,7 +315,10 @@ const isCardActive = (componentName) => {
         )}
         {options ? (
           <div className=" opton-card p-5 rounded-md z-10">
-            <div className="flex gap-3 mb-4" onClick={() => handleDownload('png')}>
+            <div
+              className="flex gap-3 mb-4"
+              onClick={() => handleDownload("png")}
+            >
               <svg
                 width="25"
                 viewBox="0 0 35 35"
@@ -344,7 +352,7 @@ const isCardActive = (componentName) => {
 
               <p>Download PNG</p>
             </div>
-            <div className="flex gap-3" onClick={() => handleDownload('jpg')}>
+            <div className="flex gap-3" onClick={() => handleDownload("jpg")}>
               <svg
                 width="25"
                 viewBox="0 0 35 35"

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.css'
 import Navbar from './components/navbar/navbar'
+import Footer from './components/Footer/footer';
 import Home from './components/home/home';
 import Fb from './components/fb/Fb'
 import Instagram from './components/Instagram/instagram';
@@ -17,6 +18,7 @@ function App() {
         <Route path="/instagram" element={<Instagram />} />
         <Route path="/google" element={<Google />} />
       </Routes>
+      {/* <Footer/> */}
     </Router>
   )
 }
