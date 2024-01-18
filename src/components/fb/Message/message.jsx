@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import image from "../../../assets/img.jpg";
 import fb from "../../../assets/fblogo.webp";
 
-function message({ setHeaderSize }) {
+function message({ setHeaderSize, adImage, setadImage }) {
   const [profileImg, setProfileImg] = useState("");
   const [uploadedImage, setUploadedImage] = useState(image);
 
@@ -26,9 +26,9 @@ function message({ setHeaderSize }) {
   const handleImageChange2 = (e) => {
     const file = e.target.files[0];
     if (file && file.type.substr(0, 5) === "image") {
-      setUploadedImage(URL.createObjectURL(file));
+      setadImage(URL.createObjectURL(file));
     } else {
-      setUploadedImage("");
+      setadImage("");
     }
   };
   return (
@@ -132,7 +132,7 @@ function message({ setHeaderSize }) {
       <div>
         <label htmlFor="upload-ad-icon" className="cursor-pointer banner-img">
           <img
-            src={uploadedImage}
+            src={adImage}
             alt="Ad"
             className=" h-[60px] w-[60px] rounded-lg object-cover"
           />

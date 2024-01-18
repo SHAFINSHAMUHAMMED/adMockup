@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-import image from "../../../assets/img.jpg";
 import fb from "../../../assets/fblogo.webp";
-function Feeds({ setHeaderSize, mobile }) {
+function Feeds({ setHeaderSize, mobile , adImage, setadImage }) {
   const [profileImg, setProfileImg] = useState("");
   const [companyName, setCompanyName] = useState("Default Company Name");
-  const [adText, setAdText] = useState("Try Ad Mocup Now! its free");
   const [adText2, setAdText2] = useState("Try Ad Mocup Now! its free");
   const [adP, setAdP] = useState(
     "Ad Mockups lets you create fast and easy mockups all in one place. Test it out!"
@@ -22,7 +20,6 @@ function Feeds({ setHeaderSize, mobile }) {
       }
     }
   }, [setHeaderSize, mobile]);
-  const [uploadedImage, setUploadedImage] = useState(image);
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file && file.type.substr(0, 5) === "image") {
@@ -34,9 +31,9 @@ function Feeds({ setHeaderSize, mobile }) {
   const handleImageChange2 = (e) => {
     const file = e.target.files[0];
     if (file && file.type.substr(0, 5) === "image") {
-      setUploadedImage(URL.createObjectURL(file));
+      setadImage(URL.createObjectURL(file));
     } else {
-      setUploadedImage("");
+      setadImage("");
     }
   };
 
@@ -176,7 +173,7 @@ function Feeds({ setHeaderSize, mobile }) {
       </h5>
 
       <label htmlFor="upload-ad-image" className="cursor-pointer banner-img">
-        <img src={uploadedImage} alt="Ad" className="w-full max-h-[260px]" />
+        <img src={adImage} alt="Ad" className="w-full max-h-[360px] object-contain" />
         <svg
           className="pen-icon2"
           width={20}

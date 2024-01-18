@@ -9,6 +9,7 @@ import LeadForm from "./LeadForm/LeadForm";
 import Message from "./Message/message";
 import Story from "./Story/story";
 import Reels from "./Reels/reels";
+// import image from "../../assets/img.jpg";
 
 function Fb() {
   const [setting, setSetting] = useState(false);
@@ -17,6 +18,7 @@ function Fb() {
   const [sizeActive, setsizeActive] = useState("original");
   const [activeComponent, setActiveComponent] = useState("feeds");
   const [headerSize, setHeaderSize] = useState("490px");
+  const [adImage , setadImage ] = useState (image)
   const ref = useRef(null);
   const reff = useRef(null);
 
@@ -27,17 +29,17 @@ function Fb() {
   const renderComponent = () => {
     switch (activeComponent) {
       case "feeds":
-        return <Feeds setHeaderSize={setHeaderSize} mobile={mobile} />;
+        return <Feeds setHeaderSize={setHeaderSize} mobile={mobile} adImage={adImage} setadImage={setadImage} />;
       case "leadForm":
-        return <LeadForm setHeaderSize={setHeaderSize} mobile={mobile} />;
+        return <LeadForm setHeaderSize={setHeaderSize} mobile={mobile} adImage={adImage} setadImage={setadImage} />;
       case "message":
-        return <Message setHeaderSize={setHeaderSize} />;
+        return <Message setHeaderSize={setHeaderSize} adImage={adImage} setadImage={setadImage} />;
       case "story":
-        return <Story setHeaderSize={setHeaderSize} format={sizeActive} />;
+        return <Story setHeaderSize={setHeaderSize} format={sizeActive} adImage={adImage} setadImage={setadImage} />;
       case "reels":
-        return <Reels setHeaderSize={setHeaderSize} format={sizeActive} />;
+        return <Reels setHeaderSize={setHeaderSize} format={sizeActive} adImage={adImage} setadImage={setadImage} />;
       default:
-        return <Feeds setHeaderSize={setHeaderSize} mobile={mobile} />;
+        return <Feeds setHeaderSize={setHeaderSize} mobile={mobile} adImage={adImage} setadImage={setadImage} />;
     }
   };
 

@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import NavHeader from "../NavHeader/NavHeader";
 import image from "../../../assets/img.jpg";
 import webq from "../../../assets/WebQmedia-Official-Logo.svg";
-function InstaReel({ setHeaderSize, mobile, format }) {
+function InstaReel({ setHeaderSize, mobile, format, adImage, setadImage  }) {
   const [profileImg, setProfileImg] = useState("");
   const [uploadedImage, setUploadedImage] = useState(image);
   const myRef = useRef(null);
@@ -23,9 +22,9 @@ function InstaReel({ setHeaderSize, mobile, format }) {
   const handleImageChange2 = (e) => {
     const file = e.target.files[0];
     if (file && file.type.substr(0, 5) === "image") {
-      setUploadedImage(URL.createObjectURL(file));
+      setadImage(URL.createObjectURL(file));
     } else {
-      setUploadedImage("");
+      setadImage("");
     }
   };
 
@@ -47,7 +46,7 @@ function InstaReel({ setHeaderSize, mobile, format }) {
         <img
           className="absolute h-full object-cover z-1 rounded-[10px]"
           onClick={handleImageClick}
-          src={uploadedImage}
+          src={adImage}
           alt=""
         />
       ) : (
@@ -77,7 +76,7 @@ function InstaReel({ setHeaderSize, mobile, format }) {
             className="cursor-pointer banner-img h-[200px] mt-28 mb-20"
           >
             <img
-              src={uploadedImage}
+              src={adImage}
               alt="Ad"
               crossOrigin="anonymous"
               className="w-full h-[230px]  "

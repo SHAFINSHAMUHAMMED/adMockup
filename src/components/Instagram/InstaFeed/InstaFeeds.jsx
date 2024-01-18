@@ -1,11 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import image from "../../../assets/img.jpg";
 import webq from "../../../assets/WebQmedia-Official-Logo.svg";
-import NavHeader from "../NavHeader/NavHeader";
 
-function InstaFeeds({ setHeaderSize, mobile }) {
+function InstaFeeds({ setHeaderSize, mobile, adImage, setadImage }) {
   const [profileImg, setProfileImg] = useState("");
-  const [uploadedImage, setUploadedImage] = useState(image);
   const myRef = useRef(null);
 
   useEffect(() => {
@@ -31,9 +28,9 @@ function InstaFeeds({ setHeaderSize, mobile }) {
   const handleImageChange2 = (e) => {
     const file = e.target.files[0];
     if (file && file.type.substr(0, 5) === "image") {
-      setUploadedImage(URL.createObjectURL(file));
+      setadImage(URL.createObjectURL(file));
     } else {
-      setUploadedImage("");
+      setadImage("");
     }
   };
 
@@ -144,7 +141,7 @@ function InstaFeeds({ setHeaderSize, mobile }) {
 
         <label htmlFor="upload-ad-image" className="cursor-pointer banner-img">
           <img
-            src={uploadedImage}
+            src={adImage}
             alt="Ad"
             className={` ${mobile ? "w-full h-[229px]" : "w-full h-[338px]"}`}
           />

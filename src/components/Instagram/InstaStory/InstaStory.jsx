@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import NavHeader from "../NavHeader/NavHeader";
 import image from "../../../assets/img.jpg";
 import webq from "../../../assets/WebQmedia-Official-Logo.svg";
 import ColorThief from "colorthief";
-function InstaStory({ setHeaderSize, mobile, format }) {
+function InstaStory({ setHeaderSize, mobile, format, adImage, setadImage  }) {
   const [profileImgs, setProfileImgs] = useState("");
   const [uploadedImages, setUploadedImages] = useState(image);
   const [bgGradient, setBgGradient] = useState(
@@ -28,9 +27,9 @@ function InstaStory({ setHeaderSize, mobile, format }) {
   const handleImageChange2 = (e) => {
     const file = e.target.files[0];
     if (file && file.type.substr(0, 5) === "image") {
-      setUploadedImages(URL.createObjectURL(file));
+      setadImage(URL.createObjectURL(file));
     } else {
-      setUploadedImages("");
+      setadImage("");
     }
   };
 
@@ -53,7 +52,7 @@ function InstaStory({ setHeaderSize, mobile, format }) {
         imageElement.removeEventListener("load", onLoad);
       }
     };
-  }, [uploadedImages]);
+  }, [adImage]);
 
   const extractColors = () => {
     const colorThief = new ColorThief();
@@ -81,7 +80,7 @@ function InstaStory({ setHeaderSize, mobile, format }) {
         <img
           className="absolute h-full object-cover z-5 rounded-[10px]"
           onClick={handleImageClick}
-          src={uploadedImages}
+          src={adImage}
           alt=""
         />
       ) : (
@@ -232,7 +231,7 @@ function InstaStory({ setHeaderSize, mobile, format }) {
           >
             <img
               ref={imgRef}
-              src={uploadedImages}
+              src={adImage}
               alt="Ad"
               crossOrigin="anonymous"
               className="w-full h-[200px] mt-28 mb-20 "

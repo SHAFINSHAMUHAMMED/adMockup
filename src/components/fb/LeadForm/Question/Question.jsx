@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import image from "../../../../assets/img.jpg";
 import fb from "../../../../assets/fblogo.webp";
-function question({ setHeaderSize, mobile }) {
+function question({ setHeaderSize, mobile, adImage, setadImage  }) {
   const [uploadedImage, setUploadedImage] = useState(image);
 
   useEffect(() => {
@@ -20,9 +20,9 @@ function question({ setHeaderSize, mobile }) {
   const handleImageChange2 = (e) => {
     const file = e.target.files[0];
     if (file && file.type.substr(0, 5) === "image") {
-      setUploadedImage(URL.createObjectURL(file));
+      setadImage(URL.createObjectURL(file));
     } else {
-      setUploadedImage("");
+      setadImage("");
     }
   };
 
@@ -30,7 +30,6 @@ function question({ setHeaderSize, mobile }) {
     { id: 1, label: "Name", placeholder: "Enter Your Answer." },
     { id: 2, label: "Place", placeholder: "Enter Your Answer." },
   ]);
-  const [newQuestion, setNewQuestion] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   // Function to remove a questionss
@@ -81,7 +80,7 @@ function question({ setHeaderSize, mobile }) {
   return (
     <div className="border border-gray-300 bg-gray-200 rounded-md">
       <label htmlFor="upload-ad-image" className="cursor-pointer banner-img">
-        <img src={uploadedImage} alt="Ad" className="w-full max-h-[260px]" />
+        <img src={adImage} alt="Ad" className="w-full max-h-[360px] object-cover" />
         <svg
           className="pen-icon2"
           width={20}

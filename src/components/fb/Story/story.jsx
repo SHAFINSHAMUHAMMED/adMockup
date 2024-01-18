@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import image from "../../../assets/img.jpg";
 import fb from "../../../assets/fblogo.webp";
 import ColorThief from "colorthief";
-function story({ setHeaderSize, format }) {
+function story({ setHeaderSize, format, adImage, setadImage }) {
   const [profileImgs, setProfileImgs] = useState("");
   const [uploadedImages, setUploadedImages] = useState(image);
   const [bgGradient, setBgGradient] = useState(
@@ -32,7 +32,7 @@ function story({ setHeaderSize, format }) {
   const handleImageChange2 = (e) => {
     const file = e.target.files[0];
     if (file && file.type.substr(0, 5) === "image") {
-      setUploadedImages(URL.createObjectURL(file));
+      setadImage(URL.createObjectURL(file));
       setIsPng(file.type === "image/png");
     }
   };
@@ -56,7 +56,7 @@ function story({ setHeaderSize, format }) {
         imageElement.removeEventListener("load", onLoad);
       }
     };
-  }, [uploadedImages]);
+  }, [adImage]);
 
   const extractColors = () => {
     const colorThief = new ColorThief();
@@ -69,7 +69,7 @@ function story({ setHeaderSize, format }) {
   const mainDivStyle =
     format === "1:1"
       ? {
-          backgroundImage: `url(${uploadedImages})`,
+          backgroundImage: `url(${adImage})`,
           backgroundColor: "black",
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -229,7 +229,7 @@ function story({ setHeaderSize, format }) {
         >
           <img
             ref={imgRef}
-            src={uploadedImages}
+            src={adImage}
             alt="Ad"
             crossOrigin="anonymous"
             className="w-full object-cover h-[200px] mt-28 mb-28 "

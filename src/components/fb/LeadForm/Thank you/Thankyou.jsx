@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import image from "../../../../assets/img.jpg";
 import fb from "../../../../assets/fblogo.webp";
 
-function Thankyou({ setHeaderSize, mobile }) {
+function Thankyou({ setHeaderSize, mobile, adImage, setadImage }) {
   const [profileImg, setProfileImg] = useState("");
 
   useEffect(() => {
@@ -26,20 +25,19 @@ function Thankyou({ setHeaderSize, mobile }) {
       setProfileImg("");
     }
   };
-  const [uploadedImage, setUploadedImage] = useState(image);
   const handleImageChange2 = (e) => {
     const file = e.target.files[0];
     if (file && file.type.substr(0, 5) === "image") {
-      setUploadedImage(URL.createObjectURL(file));
+      setadImage(URL.createObjectURL(file));
     } else {
-      setUploadedImage("");
+      setadImage("");
     }
   };
 
   return (
     <div className="border border-gray-300 bg-gray-200 rounded-md bottom-0">
       <label htmlFor="upload-ad-image" className="cursor-pointer banner-img">
-        <img src={uploadedImage} alt="Ad" className="w-full max-h-[260px]" />
+        <img src={adImage} alt="Ad" className="w-full max-h-[360px] object-cover" />
         <svg
           className="pen-icon2"
           width={20}

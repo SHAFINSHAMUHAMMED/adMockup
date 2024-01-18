@@ -4,19 +4,19 @@ import Question from "./Question/Question";
 import PrivacyPolicy from "./Privacy/Privacy";
 import Thankyou from "./Thank you/Thankyou";
 
-function LeadForm({ setHeaderSize, mobile }) {
+function LeadForm({ setHeaderSize, mobile, adImage, setadImage  }) {
   const [activeComponent, setActiveComponent] = useState("Ad");
 
   const renderActiveComponent = () => {
     switch (activeComponent) {
       case "Ad":
-        return <Ad mobile={mobile} setHeaderSize={setHeaderSize} />;
+        return <Ad mobile={mobile} setHeaderSize={setHeaderSize} adImage={adImage} setadImage={setadImage} />;
       case "Question":
-        return <Question mobile={mobile} setHeaderSize={setHeaderSize} />;
+        return <Question mobile={mobile} setHeaderSize={setHeaderSize} adImage={adImage} setadImage={setadImage} />;
       case "Privacy":
-        return <PrivacyPolicy mobile={mobile} setHeaderSize={setHeaderSize} />;
+        return <PrivacyPolicy mobile={mobile} setHeaderSize={setHeaderSize} adImage={adImage} setadImage={setadImage} />;
       case "Thankyou":
-        return <Thankyou mobile={mobile} setHeaderSize={setHeaderSize} />;
+        return <Thankyou mobile={mobile} setHeaderSize={setHeaderSize} adImage={adImage} setadImage={setadImage} />;
       default:
         return null;
     }

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import image from "../../../../assets/img.jpg";
 import fb from "../../../../assets/fblogo.webp";
-function ad({ setHeaderSize, mobile }) {
+function ad({ setHeaderSize, mobile, adImage, setadImage  }) {
   const [profileImg, setProfileImg] = useState("");
   const [companyName, setCompanyName] = useState("Default Company Name");
   const [adText, setAdText] = useState("Try Ad Mocup Now! its free");
@@ -9,7 +8,6 @@ function ad({ setHeaderSize, mobile }) {
   const [adP, setAdP] = useState(
     "Ad Mockups lets you create fast and easy mockups all in one place. Test it out!"
   );
-  const [uploadedImage, setUploadedImage] = useState(image);
 
   useEffect(() => {
     if (window.innerWidth <= 768) {
@@ -35,9 +33,9 @@ function ad({ setHeaderSize, mobile }) {
   const handleImageChange2 = (e) => {
     const file = e.target.files[0];
     if (file && file.type.substr(0, 5) === "image") {
-      setUploadedImage(URL.createObjectURL(file));
+      setadImage(URL.createObjectURL(file));
     } else {
-      setUploadedImage("");
+      setadImage("");
     }
   };
 
@@ -177,9 +175,9 @@ function ad({ setHeaderSize, mobile }) {
 
       <label htmlFor="upload-ad-image" className="cursor-pointer banner-img">
         <img
-          src={uploadedImage}
+          src={adImage}
           alt="Ad"
-          className="w-full mt-2 max-h-[260px]"
+          className="w-full mt-2 max-h-[360px] object-cover"
         />
         <svg
           className="pen-icon2"

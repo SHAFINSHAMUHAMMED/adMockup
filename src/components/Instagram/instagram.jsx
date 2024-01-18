@@ -3,6 +3,7 @@ import Feed from "./InstaFeed/InstaFeeds";
 import Story from "./InstaStory/InstaStory";
 import Reel from "./InstaReel/InstaReel";
 import domtoimage from "dom-to-image";
+import image from "../../assets/img.jpg";
 
 function Instagram() {
   const [activeComponent, setActiveComponent] = useState("feeds");
@@ -12,6 +13,7 @@ function Instagram() {
   const [options, setOptions] = useState(false);
   const [mobile, setMobile] = useState(false);
   const [sizeActive, setsizeActive] = useState("original");
+  const [adImage , setadImage ] = useState (image)
   const ref = useRef(null);
   const reff = useRef(null);
 
@@ -66,13 +68,15 @@ function Instagram() {
   const renderComponent = () => {
     switch (activeComponent) {
       case "feeds":
-        return <Feed setHeaderSize={setHeaderSize} mobile={mobile} />;
+        return <Feed setHeaderSize={setHeaderSize} mobile={mobile} adImage={adImage} setadImage={setadImage} />;
       case "story":
         return (
           <Story
             setHeaderSize={setHeaderSize}
             mobile={mobile}
             format={sizeActive}
+            adImage={adImage} 
+            setadImage={setadImage}
           />
         );
       case "reels":
@@ -81,10 +85,12 @@ function Instagram() {
             setHeaderSize={setHeaderSize}
             mobile={mobile}
             format={sizeActive}
+            adImage={adImage} 
+            setadImage={setadImage}
           />
         );
       default:
-        return <Feed setHeaderSize={setHeaderSize} mobile={mobile} />;
+        return <Feed setHeaderSize={setHeaderSize} mobile={mobile} adImage={adImage} setadImage={setadImage} />;
     }
   };
 
