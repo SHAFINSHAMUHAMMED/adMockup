@@ -143,7 +143,7 @@ function InstaFeeds({ setHeaderSize, mobile, adImage, setadImage }) {
           <img
             src={adImage}
             alt="Ad"
-            className={` ${mobile ? "w-full h-[229px]" : "w-full h-[338px]"}`}
+            className={` ${mobile ? "w-full h-fit" : "w-full h-fit"}`}
           />
           <svg
             className="pen-icon2"

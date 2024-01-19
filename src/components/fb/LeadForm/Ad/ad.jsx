@@ -177,7 +177,7 @@ function ad({ setHeaderSize, mobile, adImage, setadImage  }) {
         <img
           src={adImage}
           alt="Ad"
-          className="w-full mt-2 max-h-[360px] object-cover"
+          className="w-full mt-2 max-h-fit object-cover"
         />
         <svg
           className="pen-icon2"

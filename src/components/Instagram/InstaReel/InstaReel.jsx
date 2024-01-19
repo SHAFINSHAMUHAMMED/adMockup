@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import image from "../../../assets/img.jpg";
 import webq from "../../../assets/WebQmedia-Official-Logo.svg";
-function InstaReel({ setHeaderSize, mobile, format, adImage, setadImage  }) {
+function InstaReel({ setHeaderSize, mobile, format, adImage, setadImage }) {
   const [profileImg, setProfileImg] = useState("");
-  const [uploadedImage, setUploadedImage] = useState(image);
   const myRef = useRef(null);
   const fileInputRef = useRef(null);
 
@@ -52,7 +50,7 @@ function InstaReel({ setHeaderSize, mobile, format, adImage, setadImage  }) {
       ) : (
         ""
       )}
-      <div className="bg-black  m-auto flex flex-col rounded-lg pb-5 ">
+      <div className="bg-black  m-auto flex flex-col rounded-[12px] pb-5 ">
         <div className="flex justify-between ps-5 pe-3 pt-5 z-10">
           <h1 className="text-white text-[32px] font-[700]">Reels</h1>
 
@@ -198,7 +196,7 @@ function InstaReel({ setHeaderSize, mobile, format, adImage, setadImage  }) {
                 </p>
               </div>
             </div>
-            <div className="flex justify-evenly items-center mt-5 mb-5 w-[90%]">
+            <div className="flex justify-evenly items-center mt-2 mb-3 w-[90%]">
               <div className="icons flex justify-evenly w-full ">
                 <button
                   className=" button flex items-center justify-between w-full  text-black font-bold m-auto p-2 ps-4 pe-5 rounded-lg bg-white"

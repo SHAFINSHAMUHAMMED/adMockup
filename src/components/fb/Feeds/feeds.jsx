@@ -38,7 +38,7 @@ function Feeds({ setHeaderSize, mobile , adImage, setadImage }) {
   };
 
   return (
-    <div className="border border-gray-300 rounded z-1 bg-gray-300">
+    <div className="border border-gray-300 rounded z-1 bg-white">
       <div className="flex justify-between items-start p-4 pb-0 bg-white">
         <div className="flex">
           <label
@@ -173,7 +173,7 @@ function Feeds({ setHeaderSize, mobile , adImage, setadImage }) {
       </h5>
 
       <label htmlFor="upload-ad-image" className="cursor-pointer banner-img">
-        <img src={adImage} alt="Ad" className="w-full max-h-[360px] object-contain" />
+        <img src={adImage} alt="Ad" className="w-full max-h-fit object-contain" />
         <svg
           className="pen-icon2"
           width={20}

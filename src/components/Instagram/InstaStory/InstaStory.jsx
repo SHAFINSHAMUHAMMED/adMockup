@@ -75,7 +75,7 @@ function InstaStory({ setHeaderSize, mobile, format, adImage, setadImage  }) {
   };
 
   return (
-    <div ref={myRef} className="w-[320px] h-[602px] m-auto relative">
+    <div ref={myRef} className="w-[320px] h-fit m-auto relative">
       {format == "1:1" ? (
         <img
           className="absolute h-full object-cover z-5 rounded-[10px]"
@@ -234,7 +234,7 @@ function InstaStory({ setHeaderSize, mobile, format, adImage, setadImage  }) {
               src={adImage}
               alt="Ad"
               crossOrigin="anonymous"
-              className="w-full h-[200px] mt-28 mb-20 "
+              className="w-full h-[300px] mt-28 mb-20 "
             />
             <svg
               className="pen-icon2 me-32 mt-7"
